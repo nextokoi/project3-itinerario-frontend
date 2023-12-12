@@ -1,8 +1,8 @@
-import React from 'react'
+import { Box } from "@mui/material"
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <Box sx={{backgroundColor: '#1976d2', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Footer</Box>
   )
 }
 
