@@ -34,7 +34,10 @@ function SearchBar({placeholder}) {
           }}
           sx={{backgroundColor: '#fff'}}
         />
-      ) }
+      )}
+      onChange={(e)=>{
+        console.log(e.target.value)
+      }}
     />
   );
 }
