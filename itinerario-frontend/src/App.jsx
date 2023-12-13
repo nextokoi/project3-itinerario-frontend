@@ -12,11 +12,8 @@ function App() {
   const [destinations, setDestinations] = useState('')
   const [origins, setOrigins] = useState('')
 
-  const contextCountries = { origins, setOrigins, destinations, setDestinations }
-
-  console.log("ooo", origins)
-  console.log("ddd", destinations)
-
+  const contextCountries = { origins, setOrigins, destinations, setDestinations } 
+  
   useEffect(() => {
     const fetchData = async () => {
 

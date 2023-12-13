@@ -10,7 +10,6 @@ function SearchBar({ placeholder, inputChange }) {
   function handleInputChange(option) {
 
     let valueChosen = option.target.outerText
-    console.log("this is the value chosen from searchBar ", valueChosen)
     inputChange(valueChosen)
 
   }
