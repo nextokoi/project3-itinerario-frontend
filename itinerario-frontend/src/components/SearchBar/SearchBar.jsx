@@ -4,7 +4,17 @@ import PropTypes from 'prop-types'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-function SearchBar({placeholder}) {
+
+function SearchBar({ placeholder, inputChange }) {
+
+  function handleInputChange(option) {
+
+    let valueChosen = option.target.outerText
+    console.log("this is the value chosen from searchBar ", valueChosen)
+    inputChange(valueChosen)
+
+  }
+
   return (
     <Autocomplete
       id="country-select-demo"
@@ -21,56 +31,58 @@ function SearchBar({placeholder}) {
             src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
             alt=""
           />
-          {option.label} 
+          {option.label}
         </Box>
       )}
       renderInput={(params) => (
         <TextField
-          {...params }
+
+          {...params}
           label={placeholder}
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill
           }}
-          sx={{backgroundColor: '#fff'}}
+          sx={{ backgroundColor: '#fff' }}
+
         />
       )}
-      onChange={(e)=>{
-        console.log(e.target.value)
-      }}
+
+      onChange={(option) => { handleInputChange(option) }}
+
     />
   );
 }
 
 const countries = [
-    {
-        code: 'FR',
-        label: 'France',
-        suggested: true,
-    },
-    {
-        code: 'JP',
-        label: 'Japan',
-        suggested: true,
-    },
-    {
-        code: 'CA',
-        label: 'Canada',
-        suggested: true,
-    },
-    { 
-        code: 'ES', 
-        label: 'Spain', 
-    },
-    { 
-        code: 'BR', 
-        label: 'Brazil',
-    }
+  {
+    code: 'FR',
+    label: 'France',
+    suggested: true,
+  },
+  {
+    code: 'JP',
+    label: 'Japan',
+    suggested: true,
+  },
+  {
+    code: 'CA',
+    label: 'Canada',
+    suggested: true,
+  },
+  {
+    code: 'ES',
+    label: 'Spain',
+  },
+  {
+    code: 'BR',
+    label: 'Brazil',
+  }
 ];
 
 
 SearchBar.propTypes = {
-    placeholder: PropTypes.string
+  placeholder: PropTypes.string
 }
 
 export default SearchBar
