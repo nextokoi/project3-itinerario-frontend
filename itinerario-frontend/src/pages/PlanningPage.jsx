@@ -1,7 +1,7 @@
 import React from 'react'
-import CustomizedSteppers from '../components/Stepper/Stepper'
-import BasicBreadcrumbs from '../components/BreadCrumbs/BreadCrumbs'
-import CalendarComponent from '../components/CalendarComponent/CalendarComponent'
+import CustomizedSteppers from '../components/GenericComponents/Stepper/Stepper'
+import BasicBreadcrumbs from '../components/GenericComponents/BreadCrumbs/BreadCrumbs'
+import CalendarComponent from '../components/MainPlanning/CalendarMain/CalendarMain'
 import { Box } from '@mui/material'
 
 export default function PlanningPage() {

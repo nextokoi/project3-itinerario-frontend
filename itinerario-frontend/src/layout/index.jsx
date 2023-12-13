@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
-import Header from "../components/Header/Header"
-import Footer from "../components/Footer/Footer"
+import Header from "../components/GenericComponents/Header/Header"
+import Footer from "../components/GenericComponents/Footer/Footer"
 import { Box } from "@mui/material"
 
 export default function Root() {

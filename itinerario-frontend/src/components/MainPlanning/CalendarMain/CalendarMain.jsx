@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material'
-import ResponsiveDatePickers from '../CalendarPlanning/CalendarPlanning.jsx'
+import ResponsiveDatePickers from '../../GenericComponents/CalendarPlanning/CalendarPlanning.jsx'
 
 export default function CalendarComponent() {
     return (

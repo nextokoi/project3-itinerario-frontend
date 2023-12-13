@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material"
 import { Link } from 'react-router-dom'
-import SearchBar from "../components/SearchBar/SearchBar"
+import SearchBar from "../components/GenericComponents/SearchBar/SearchBar"
 import { useState, useEffect, useContext } from "react"
 import { countryContext } from "../contexts/countryContext"
 import PublicIcon from '@mui/icons-material/Public';

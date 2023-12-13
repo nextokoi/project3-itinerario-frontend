@@ -33,6 +33,7 @@ export default function ResponsiveDatePickers({ labelText }) {
                 <DemoItem label="Static variant">
                     <StaticDatePicker defaultValue={dayjs('2022-04-17')} />
                 </DemoItem> */}
+                
             </DemoContainer>
         </LocalizationProvider>
     );
