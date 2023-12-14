@@ -3,7 +3,7 @@ import BasicBreadcrumbs from "../../GenericComponents/BreadCrumbs/BreadCrumbs"
 import CustomizedSteppers from "./../../GenericComponents/Stepper/Stepper"
 
 
-function HeaderPlanning() {
+function HeaderPlanning({stepperStatus}) {
     const destinationImg = './../../public/photos/destinoEjemplo.jpg'
   return (
     <div>
@@ -12,7 +12,7 @@ function HeaderPlanning() {
             </Box>
 
             <Box>
-                <CustomizedSteppers />
+                <CustomizedSteppers stepperStatus={stepperStatus} />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Box sx={{

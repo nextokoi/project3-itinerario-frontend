@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import ResponsiveDatePickers from '../../../GenericComponents/CalendarPlanning/CalendarPlanning.jsx'
 import ButtonNavigation from '../../../GenericComponents/ButtonNavigation/ButtonNavigation.jsx'
 
-export default function CalendarComponent() {
+export default function CalendarComponent({handleNavigation}) {
     return (
     <>
         <Box sx={{
@@ -23,8 +23,8 @@ export default function CalendarComponent() {
 
         </Box>
            <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-                <ButtonNavigation text={'Back'}/>
-                <ButtonNavigation text={'Next'}/>
+                <ButtonNavigation handleNavigation={handleNavigation} text={'Back'}/>
+                <ButtonNavigation handleNavigation={handleNavigation} text={'Next'}/>
         </Box>
     </>
     )

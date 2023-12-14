@@ -5,7 +5,7 @@ import ActivitySelectedCard from '../../../GenericComponents/ActivitySelectedCar
 import ButtonNavigation from './../../../GenericComponents/ButtonNavigation/ButtonNavigation'
 import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage'
 
-function LodgingMain() {
+function LodgingMain({handleNavigation}) {
   return (
     <Box sx={{ px: 10, my: 5}}>
         <Typography variant="h3" sx={{mb: 5}}>Choose Lodging</Typography>
@@ -26,8 +26,8 @@ function LodgingMain() {
             </Box>
         </Box>
         <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-            <ButtonNavigation text={'Back'}/>
-            <ButtonNavigation text={'Show Summary'} bgColor={"#4BB449"}/>
+            <ButtonNavigation handleNavigation={handleNavigation} text={'Back'}/>
+            <ButtonNavigation handleNavigation={handleNavigation} text={'Show Summary'} bgColor={"#4BB449"}/>
         </Box>
     </Box>
   )

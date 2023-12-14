@@ -11,6 +11,11 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
+import HotelIcon from '@mui/icons-material/Hotel';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import { useEffect } from 'react';
 
 
 const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
@@ -112,10 +117,11 @@ function ColorlibStepIcon(props) {
     const { active, completed, className } = props;
 
     const icons = {
-        1: <SettingsIcon />,
-        2: <GroupAddIcon />,
-        3: <VideoLabelIcon />,
-        4: <FlightTakeoffIcon />,
+        1: <DateRangeIcon />,
+        2: <FlightTakeoffIcon />,
+        3: <PedalBikeIcon />,
+        4: <HotelIcon />,
+        5: <DoneOutlineIcon />
     };
 
     return (
@@ -143,12 +149,14 @@ ColorlibStepIcon.propTypes = {
     icon: PropTypes.node,
 };
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = ['Trip Date', 'Flight Booking', 'Activities','Lodging','Summary'];
 
-export default function CustomizedSteppers() {
+export default function CustomizedSteppers({stepperStatus}) {
+
+
     return (
         <Stack sx={{ width: '100%' }} spacing={4}>
-            <Stepper alternativeLabel activeStep={1} connector={<ColorlibConnector />}>
+            <Stepper alternativeLabel activeStep={stepperStatus} connector={<ColorlibConnector />}>
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>

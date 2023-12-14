@@ -116,7 +116,7 @@ const fligtListVuelta = [
 ]
 
 
-function FlightMain() {
+function FlightMain({handleNavigation}) {
 
     const flightListedGoing = fligtListIda.map((flight) => {
 
@@ -186,8 +186,8 @@ function FlightMain() {
                 </Box>
             </Box>
             <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-                <ButtonNavigation text={'Back'}/>
-                <ButtonNavigation text={'Next'}/>
+                <ButtonNavigation handleNavigation={handleNavigation} text={'Back'}/>
+                <ButtonNavigation handleNavigation={handleNavigation} text={'Next'}/>
             </Box>
         </Box>
     )
