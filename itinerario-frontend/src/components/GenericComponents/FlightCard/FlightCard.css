@@ -1,0 +1,7 @@
+.rotarDcha {
+    transform: rotate(90deg);
+}
+
+.rotarIzq {
+    transform: rotate(270deg);
+}
