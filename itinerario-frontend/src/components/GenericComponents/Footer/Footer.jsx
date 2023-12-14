@@ -20,7 +20,7 @@ function Footer() {
 
   return (
 
-    <Box sx={{ backgroundColor: '#1976d2', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingY: '60px', paddingX: '100px' }}>
+    <Box sx={{ backgroundColor: '#1976d2', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingX: '100px' }}>
 
       <Box sx={{ display: 'flex', color: '#fff', justifyContent: 'space-between', alignItems: 'center', gap: '70px' }}>
 
