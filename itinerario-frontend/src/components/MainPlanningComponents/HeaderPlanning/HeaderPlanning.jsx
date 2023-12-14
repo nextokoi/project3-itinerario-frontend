@@ -14,17 +14,17 @@ function HeaderPlanning() {
             <Box>
                 <CustomizedSteppers />
             </Box>
-
-            <Box sx={{
-                backgroundImage: `url(${destinationImg})`,
-                backgroundPosition: "center",
-                marginY: "40px",
-                height: "400px",
-                width: "500px",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                border: "1px solid #1976d2",
-            }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box sx={{
+                  backgroundImage: `url(${destinationImg})`,
+                  backgroundPosition: "center",
+                  marginY: "40px",
+                  height: "600px",
+                  width: "1000px",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "contain"
+              }}>
+              </Box>
             </Box>
     </div>
   )
