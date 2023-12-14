@@ -5,7 +5,7 @@ import FlightMain from '../components/MainPlanningComponents/BodyPlanning/Flight
 import LodgingMain from '../components/MainPlanningComponents/BodyPlanning/LodgingMain/LodgingMain'
 import LogInForm from '../components/GenericComponents/LogInForm/LogInForm'
 import SignUpForm from '../components/GenericComponents/SignUpForm/SignUpForm'
-
+import SummaryMain from '../components/MainPlanningComponents/BodyPlanning/SummaryMain/SummaryMain'
 
 export default function PlanningPage() {
     return (
@@ -15,7 +15,8 @@ export default function PlanningPage() {
             <FlightMain />
             <ActivityMain /> 
             <LodgingMain />
-            <LogInForm />*/}
+            <LogInForm />
+            <SummaryMain /> */}
             <SignUpForm />
         </div>
     )
