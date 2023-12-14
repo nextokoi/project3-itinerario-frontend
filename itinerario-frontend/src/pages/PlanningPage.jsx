@@ -2,14 +2,17 @@ import CalendarComponent from '../components/MainPlanningComponents/BodyPlanning
 import HeaderPlanning from '../components/MainPlanningComponents/HeaderPlanning/HeaderPlanning'
 import ActivityMain from '../components/MainPlanningComponents/BodyPlanning/ActivityMain/ActivityMain'
 import FlightMain from '../components/MainPlanningComponents/BodyPlanning/FlightMain/FlightMain'
+import LodgingMain from '../components/MainPlanningComponents/BodyPlanning/LodgingMain/LodgingMain'
+
 
 export default function PlanningPage() {
     return (
         <div>
             <HeaderPlanning />
- {/*            <CalendarComponent />
-            <ActivityMain /> */}
+           <CalendarComponent />
             <FlightMain />
+            <ActivityMain /> 
+            <LodgingMain />
         </div>
     )
 }

@@ -2,6 +2,7 @@ import FlightCard from '../../../GenericComponents/FlightCard/FlightCard'
 import { Box } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage';
+import ButtonNavigation from '../../../GenericComponents/ButtonNavigation/ButtonNavigation';
 
 // contenedor del paso Flight
 
@@ -183,6 +184,10 @@ function FlightMain() {
                         {flightListedReturn}
                     </Box>
                 </Box>
+            </Box>
+            <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
+                <ButtonNavigation text={'Back'}/>
+                <ButtonNavigation text={'Next'}/>
             </Box>
         </Box>
     )

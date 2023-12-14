@@ -24,6 +24,6 @@ export default function ActivitySelectedCard({cardImg, cardTitle, cardSubtitle})
 
 ActivitySelectedCard.propTypes = {
     cardImg : PropTypes.string,
-    cardTitle: PropTypes.cardTitle,
-    cardSubtitle: PropTypes.cardSubtitle
+    cardTitle: PropTypes.string,
+    cardSubtitle: PropTypes.string
 }
