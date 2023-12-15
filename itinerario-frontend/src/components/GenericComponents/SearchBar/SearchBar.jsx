@@ -4,21 +4,20 @@ import PropTypes from 'prop-types'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { getAllLocations } from '../../../services/locationService';
-import { useContext, useEffect } from 'react';
-import { mainContext } from '../../../contexts/mainContext';
+import { useState, useEffect } from 'react';
+
 
 function SearchBar({ placeholder, inputChange }) {
 
-  const { mainData, setMainData } = useContext(mainContext)
-
+  const [locationData, setLocation] = useState([])
 
   useEffect(() => {
     fetchData()
   }, [])
 
   const fetchData = async () => {
-      const data = await getAllLocations()
-      console.log(data)
+    const data = await getAllLocations()
+    setLocation(data)
   }
 
   function handleInputChange(e) {
@@ -33,19 +32,19 @@ function SearchBar({ placeholder, inputChange }) {
     <Autocomplete
       id="country-select-demo"
       sx={{ width: 300 }}
-      options={countries}
+      options={locationData}
       autoHighlight
-      getOptionLabel={(option) => option.label}
+      getOptionLabel={(option) => option.name}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
           <img
             loading="lazy"
             width="20"
-            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+            // srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+            // src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
             alt=""
           />
-          {option.label}
+          {option.name}
         </Box>
       )}
       renderInput={(params) => (
@@ -68,37 +67,37 @@ function SearchBar({ placeholder, inputChange }) {
   );
 }
 
-const countries = [
-  {
-    code: 'FR',
-    label: 'France',
-    suggested: true,
-  },
-  {
-    code: 'JP',
-    label: 'Japan',
-    suggested: true,
-  },
-  {
-    code: 'CA',
-    label: 'Canada',
-    suggested: true,
-  },
-  {
-    code: 'ES',
-    cityCode: 'BCN',
-    label: 'Barcelona'
-  },
-  {
-    code: 'ES',
-    cityCode: 'MAD',
-    label: 'Madrid'
-  },
-  {
-    code: 'BR',
-    label: 'Brazil',
-  }
-];
+// const countries = [
+//   {
+//     code: 'FR',
+//     label: 'France',
+//     suggested: true,
+//   },
+//   {
+//     code: 'JP',
+//     label: 'Japan',
+//     suggested: true,
+//   },
+//   {
+//     code: 'CA',
+//     label: 'Canada',
+//     suggested: true,
+//   },
+//   {
+//     code: 'ES',
+//     cityCode: 'BCN',
+//     label: 'Barcelona'
+//   },
+//   {
+//     code: 'ES',
+//     cityCode: 'MAD',
+//     label: 'Madrid'
+//   },
+//   {
+//     code: 'BR',
+//     label: 'Brazil',
+//   }
+// ];
 
 
 SearchBar.propTypes = {
