@@ -9,22 +9,7 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import './FlightCard.css'
 import PropTypes from 'prop-types'
 
-
-export default function FlightCard({
-
-    flightCompanyName,
-    departureDate,
-    originCode,
-    origin,
-    arrivalTime,
-    destination,
-    destinationCode,
-    departureTime,
-    price,
-    duration,
-    classIcon
-
-}) {
+export default function FlightCard({ data, classIcon, date }) {
 
 
     return (
@@ -44,11 +29,10 @@ export default function FlightCard({
 
                     <Box>
                         <Typography>
-                            {flightCompanyName}
+                            {data.flightCompanyName}
                         </Typography>
-                        <br />
                         <Typography>
-                            <strong>{departureDate}</strong>
+                            <strong>{date}</strong>
                         </Typography>
                     </Box>
 
@@ -61,14 +45,10 @@ export default function FlightCard({
 
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'start', width: '20%', paddingLeft: '10px' }}>
                         <Typography>
-                            <strong>{originCode}</strong>
+                            <strong>{data.origin}</strong>
                         </Typography>
                         <Typography>
-                            {origin}
-                        </Typography>
-                        <br />
-                        <Typography>
-                            {departureTime}
+                            Nombre País
                         </Typography>
                     </Box>
 
@@ -78,14 +58,10 @@ export default function FlightCard({
 
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'start ', width: '20%' }}>
                         <Typography>
-                            <strong>{destinationCode}</strong>
+                            <strong>{data.destination}</strong>
                         </Typography>
                         <Typography>
-                            {destination}
-                        </Typography>
-                        <br />
-                        <Typography>
-                            {arrivalTime}
+                            Nombre País
                         </Typography>
                     </Box>
 
@@ -93,8 +69,9 @@ export default function FlightCard({
 
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'end', paddingRight: '50px' }}>
 
-                    <Typography><strong>{price}</strong></Typography>
-                    <Typography>{duration}</Typography>
+                    <Typography><strong>{data.value} €</strong></Typography>
+                    {/* <Typography><strong>{data.price} €</strong></Typography> */}
+                    <Typography>Duration: {data.duration}</Typography>
 
                 </Box>
 
@@ -108,15 +85,7 @@ export default function FlightCard({
 }
 
 FlightCard.propTypes = {
-    flightCompanyName: PropTypes.string,
-    departureDate: PropTypes.string,
-    originCode: PropTypes.string,
-    origin: PropTypes.string,
-    arrivalTime: PropTypes.string,
-    destination: PropTypes.string,
-    destinationCode: PropTypes.string,
-    departureTime: PropTypes.string,
-    price: PropTypes.string,
-    duration: PropTypes.string,
-    classIcon: PropTypes.string
+    data: PropTypes.object,
+    classIcon: PropTypes.string,
+    date: PropTypes.string
 }
