@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material"
 import { Link } from 'react-router-dom'
 import SearchBar from "../components/GenericComponents/SearchBar/SearchBar"
 import { useEffect, useContext } from "react"
-import { countryContext } from "../contexts/countryContext"
+import { mainContext } from "../contexts/mainContext"
 import PublicIcon from '@mui/icons-material/Public';
 import HikingIcon from '@mui/icons-material/Hiking';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
@@ -12,31 +12,29 @@ function LandingPage() {
   // const [origin, setOrigin] = useState('')
   // const [destination, setDestination] = useState('')
 
-  const { origins, setOrigins, destinations, setDestinations } = useContext(countryContext)
+  const { mainData, setMainData } = useContext(mainContext)
 
-  function handleOriginChange(optionChosen) {
+  function handleOriginChange(optionChange) {
 
-    setOrigins(optionChosen)
+    setMainData(prev => ({
+      ...prev,
+      origin: optionChange,
+    }))
 
+  }
+
+  function handleDestinationChange(optionChange) {
+    setMainData(prev => ({
+      ...prev,
+      destination: optionChange
+    }))
   }
 
   useEffect(() => {
 
-    console.log("the origin is: ", origins)
+    console.log("the origin is: ", mainData)
 
-  }, [origins])
-
-  function handleDestinationChange(optionChosen) {
-
-    setDestinations(optionChosen)
-
-  }
-
-  useEffect(() => {
-
-    console.log("the destination is: ", destinations)
-
-  }, [destinations])
+  }, [mainData])
 
 
   const heroImage = './../../public/photos/hero-image.jpg'
@@ -56,7 +54,7 @@ function LandingPage() {
 
         />
 
-        <Link to='/about'><Button variant="contained" sx={{ backgroundColor: 'purple', padding: '15px' }}>Search</Button></Link>
+        <Link to='planning'><Button variant="contained" sx={{ backgroundColor: 'purple', padding: '15px' }}>Search</Button></Link>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '100px', paddingY: '100px' }}>
         <Box sx={{ display: 'flex', gap: '50px', justifyContent: 'center', width: '80%' }}>

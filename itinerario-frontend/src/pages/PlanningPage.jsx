@@ -8,12 +8,14 @@ import SignUpForm from '../components/GenericComponents/SignUpForm/SignUpForm'
 import SummaryMain from '../components/MainPlanningComponents/BodyPlanning/SummaryMain/SummaryMain'
 import Box from '@mui/material/Box'
 import ButtonNavigation from '../components/GenericComponents/ButtonNavigation/ButtonNavigation'
-import { useState, useEffect } from 'react'
-
-
-
+import { useState, useEffect, useContext } from 'react'
+import { mainContext } from '../contexts/mainContext'
 
 export default function PlanningPage() {
+    const { mainData } = useContext(mainContext)
+    
+    console.log('Origin ', mainData.origin)
+    console.log('Destination ', mainData.destination)
 
     const [stepperStatus, setStepperStatus] = useState(0)
     useEffect(() => {
@@ -32,21 +34,16 @@ export default function PlanningPage() {
         switch (stepNum) {
             case 0:
                 return (<CalendarComponent />)
-                break;
             case 1:
                 return (<FlightMain />)
-                break;
             case 2:
                 return (<ActivityMain />)
-                break;
             case 3:
                 return (<LodgingMain />)
-                break;
             case 4:
                 return (<SummaryMain />)
-                break;
             default:
-                break;
+                return <CalendarComponent />
         }
     }
 

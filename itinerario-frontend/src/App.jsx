@@ -5,14 +5,19 @@ import { signup, login } from './services/authService'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
 
-import { countryContext } from './contexts/countryContext'
+import { mainContext } from './contexts/mainContext'
 
 function App() {
 
-  const [destinations, setDestinations] = useState('')
-  const [origins, setOrigins] = useState('')
+  const [mainData, setMainData] = useState({
+    date: '',
+    origin: '',
+    destination: '',
+    activities: [],
+    lodging: ''
+  })
 
-  const contextCountries = { origins, setOrigins, destinations, setDestinations } 
+  const data = { mainData, setMainData } 
   
   useEffect(() => {
     const fetchData = async () => {
@@ -31,9 +36,9 @@ function App() {
 
   return (
     <>
-      <countryContext.Provider value={contextCountries}>
+      <mainContext.Provider value={data}>
         <RouterProvider router={router} />
-      </countryContext.Provider>
+      </mainContext.Provider>
     </>
   )
 }

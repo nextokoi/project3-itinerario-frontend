@@ -3,13 +3,28 @@ import PropTypes from 'prop-types'
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import { getAllLocations } from '../../../services/locationService';
+import { useContext, useEffect } from 'react';
+import { mainContext } from '../../../contexts/mainContext';
 
 function SearchBar({ placeholder, inputChange }) {
 
-  function handleInputChange(option) {
+  const { mainData, setMainData } = useContext(mainContext)
 
-    let valueChosen = option.target.outerText
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+      const data = await getAllLocations()
+      console.log(data)
+  }
+
+  function handleInputChange(e) {
+
+    let valueChosen = e.target.outerText
+    console.log(e)
     inputChange(valueChosen)
 
   }
@@ -71,7 +86,13 @@ const countries = [
   },
   {
     code: 'ES',
-    label: 'Spain',
+    cityCode: 'BCN',
+    label: 'Barcelona'
+  },
+  {
+    code: 'ES',
+    cityCode: 'MAD',
+    label: 'Madrid'
   },
   {
     code: 'BR',
