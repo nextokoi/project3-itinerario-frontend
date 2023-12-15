@@ -11,10 +11,10 @@ function FlightMain() {
     const [flightListOneWay, setFlightListOneWay] = useState([])
     const [flightListReturn, setFlightListReturn] = useState([])
 
-/*     useEffect(() => {
-        fetchData('MAD', 'BCN', '2023-12-20', setFlightListOneWay)
-        fetchData('BCN', 'MAD', '2023-12-21', setFlightListReturn)
-    }, []) */
+    /*     useEffect(() => {
+            fetchData('MAD', 'BCN', '2023-12-20', setFlightListOneWay)
+            fetchData('BCN', 'MAD', '2023-12-21', setFlightListReturn)
+        }, []) */
 
     useEffect(() => {
         fetchDataV2('MAD', 'BCN', '2024-01', setFlightListOneWay)
@@ -23,7 +23,7 @@ function FlightMain() {
 
     const renderFlightListOneWay = (flightList) => {
         return flightList.map((flight, index) => {
-            console.log(flight)
+
             return (
                 <FlightCard
                     key={index}

@@ -14,8 +14,8 @@ function SummaryMain() {
             <Box>
                 <Typography variant='h4' sx={{mb: 2}}>Flights</Typography>
                 <Box sx={{display: 'flex', gap: '10px'}}>
-                    <FlightCard />
-                    <FlightCard />
+                    {/* <FlightCard />
+                    <FlightCard /> */}
                 </Box>
             </Box>
         </Box>
@@ -49,6 +49,7 @@ function SummaryMain() {
             <Typography variant='h3'>1187€</Typography>
         </Box>
     </Box>
+
   )
 }
 
