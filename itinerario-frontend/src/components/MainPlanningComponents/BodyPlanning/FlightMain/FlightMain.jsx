@@ -9,27 +9,38 @@ import { mainContext } from '../../../../contexts/mainContext';
 
 function FlightMain() {
 
-    
-    const {setMainData} = useContext(mainContext)
+
+    const { mainData, setMainData } = useContext(mainContext)
     const [selectedFlight, setSelectedFlight] = useState(false)
+
+
+    // let origin = mainData.origin.cityCode;
+
+    // useEffect(() => {
+
+    //     let destination = mainData.destination
+    //     console.log(destination)
+
+    // }, [])
+
 
     const handleFlightSelect = (flight, isOneWay) => {
         if (selectedFlight === flight) {
             setSelectedFlight(null);
             setMainData((prevData) => ({
-              ...prevData,
-              flightGoing: isOneWay ? null : prevData.flightGoing,
-              flightBack: !isOneWay ? null : prevData.flightBack,
+                ...prevData,
+                flightGoing: isOneWay ? null : prevData.flightGoing,
+                flightBack: !isOneWay ? null : prevData.flightBack,
             }));
-          } else {
+        } else {
             // Seleccionar el nuevo vuelo
             setSelectedFlight(flight);
             setMainData((prevData) => ({
-              ...prevData,
-              flightGoing: isOneWay ? flight : prevData.flightGoing,
-              flightBack: !isOneWay ? flight : prevData.flightBack,
+                ...prevData,
+                flightGoing: isOneWay ? flight : prevData.flightGoing,
+                flightBack: !isOneWay ? flight : prevData.flightBack,
             }));
-          }
+        }
 
     }
 
@@ -50,16 +61,16 @@ function FlightMain() {
         return flightList
             .map((flight, index) => {
                 return (
-                <FlightCard
-                    key={index}
-                    data={flight}
-                    date={flight.depart_date}
-                    classIcon={'rotarDcha'}
-                    onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, true)}
-                    isSelected={selectedFlight === flight}
-                />
-            )
-        })
+                    <FlightCard
+                        key={index}
+                        data={flight}
+                        date={flight.depart_date}
+                        classIcon={'rotarDcha'}
+                        onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, true)}
+                        isSelected={selectedFlight === flight}
+                    />
+                )
+            })
     }
 
     const renderFlightListReturn = (flightList) => {

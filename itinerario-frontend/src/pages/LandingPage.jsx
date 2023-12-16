@@ -14,28 +14,28 @@ function LandingPage() {
 
   const { mainData, setMainData } = useContext(mainContext)
 
-  function handleOriginChange(optionChange) {
+  function handleOriginChange(optionSelected) {
 
     setMainData(prev => ({
       ...prev,
-      origin: optionChange,
+      origin: { ...optionSelected },
     }))
 
   }
 
-  function handleDestinationChange(optionChange) {
+  function handleDestinationChange(optionSelected) {
     setMainData(prev => ({
       ...prev,
-      destination: optionChange
+      destination: { ...optionSelected }
     }))
   }
+
 
   useEffect(() => {
 
-    console.log("the origin is: ", mainData)
+    console.log("mainData: ", mainData)
 
   }, [mainData])
-
 
   const heroImage = './../../public/photos/hero-image.jpg'
 
@@ -46,12 +46,10 @@ function LandingPage() {
         <SearchBar
           placeholder={'Origin'}
           inputChange={handleOriginChange}
-
         />
         <SearchBar
           placeholder={'Destination'}
           inputChange={handleDestinationChange}
-
         />
 
         <Link to='planning'><Button variant="contained" sx={{ backgroundColor: 'purple', padding: '15px' }}>Search</Button></Link>

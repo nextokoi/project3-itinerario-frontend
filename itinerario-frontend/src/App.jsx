@@ -12,16 +12,16 @@ function App() {
   const [mainData, setMainData] = useState({
     dateGoing: '',
     dateBack: '',
-    origin: '',
-    destination: '',
+    origin: {},
+    destination: {},
     flightGoing: {},
-    flightBack : {},
+    flightBack: {},
     activities: [],
     lodging: ''
   })
 
-  const data = { mainData, setMainData } 
-  
+  const data = { mainData, setMainData }
+
   useEffect(() => {
     const fetchData = async () => {
 
@@ -30,7 +30,7 @@ function App() {
         "password": "12345678",
       })
 
-      await getAllUsers()
+      // await getAllUsers()
     }
     fetchData()
   }, [])

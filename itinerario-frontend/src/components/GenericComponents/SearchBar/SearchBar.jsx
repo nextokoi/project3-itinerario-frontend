@@ -11,20 +11,27 @@ function SearchBar({ placeholder, inputChange }) {
 
   const [locationData, setLocation] = useState([])
 
+  const fetchData = async () => {
+    const data = await getAllLocations()
+    setLocation(data)
+    console.log("Data: ", data)
+
+  }
+
   useEffect(() => {
     fetchData()
   }, [])
 
-  const fetchData = async () => {
-    const data = await getAllLocations()
-    setLocation(data)
-  }
-
   function handleInputChange(e) {
 
     let valueChosen = e.target.outerText
-    console.log(e)
-    inputChange(valueChosen)
+    const filteredData = locationData.filter((data) => {
+
+      return data.name === valueChosen
+
+    })
+
+    inputChange(filteredData)
 
   }
 
@@ -40,8 +47,8 @@ function SearchBar({ placeholder, inputChange }) {
           <img
             loading="lazy"
             width="20"
-            // srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-            // src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+            // srcSet={`https://flagcdn.com/w40/${option.cityCode.toLowerCase()}.png 2x`}
+            // src={`https://flagcdn.com/w20/${option.cityCode.toLowerCase()}.png`}
             alt=""
           />
           {option.name}
