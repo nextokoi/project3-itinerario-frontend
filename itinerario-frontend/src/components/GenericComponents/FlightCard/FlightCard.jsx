@@ -8,13 +8,20 @@ import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import './FlightCard.css'
 import PropTypes from 'prop-types'
+import { useState } from 'react';
 
-export default function FlightCard({ data, classIcon, date }) {
+export default function FlightCard({ data, classIcon, date, onSelect, isSelected }) {
 
+    const [selected, setSelected] = useState(false)
+
+    const handleClick = () => {
+        setSelected(!selected)
+        onSelect && onSelect(data, !selected)
+    }
 
     return (
 
-        <Card sx={{ minWidth: 275, border: '1px solid #1976d2', marginY: '10px', maxWidth: 450 }} className='unselected'>
+        <Card sx={{ minWidth: 275, marginY: '10px', maxWidth: 450, cursor: 'pointer' }} className={isSelected ? 'selected' : 'unselected'} onClick={handleClick}>
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'start', padding: '15px', gap: '20px' }}>
 
@@ -87,5 +94,7 @@ export default function FlightCard({ data, classIcon, date }) {
 FlightCard.propTypes = {
     data: PropTypes.object,
     classIcon: PropTypes.string,
-    date: PropTypes.string
+    date: PropTypes.string,
+    onSelect: PropTypes.func,
+    isSelected: PropTypes.bool
 }

@@ -10,8 +10,28 @@ import { mainContext } from '../../../../contexts/mainContext';
 function FlightMain() {
 
     
-    const {mainData,setMainData} = useContext(mainContext)
-    
+    const {setMainData} = useContext(mainContext)
+    const [selectedFlight, setSelectedFlight] = useState(false)
+
+    const handleFlightSelect = (flight, isOneWay) => {
+        if (selectedFlight === flight) {
+            setSelectedFlight(null);
+            setMainData((prevData) => ({
+              ...prevData,
+              flightGoing: isOneWay ? null : prevData.flightGoing,
+              flightBack: !isOneWay ? null : prevData.flightBack,
+            }));
+          } else {
+            // Seleccionar el nuevo vuelo
+            setSelectedFlight(flight);
+            setMainData((prevData) => ({
+              ...prevData,
+              flightGoing: isOneWay ? flight : prevData.flightGoing,
+              flightBack: !isOneWay ? flight : prevData.flightBack,
+            }));
+          }
+
+    }
 
     const [flightListOneWay, setFlightListOneWay] = useState([])
     const [flightListReturn, setFlightListReturn] = useState([])
@@ -35,6 +55,8 @@ function FlightMain() {
                     data={flight}
                     date={flight.depart_date}
                     classIcon={'rotarDcha'}
+                    onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, true)}
+                    isSelected={selectedFlight === flight}
                 />
             )
         })
@@ -48,6 +70,8 @@ function FlightMain() {
                     data={flight}
                     date={flight.depart_date}
                     classIcon={'rotarIzq'}
+                    onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, false)}
+                    isSelected={selectedFlight === flight}
                 />
             )
         })
