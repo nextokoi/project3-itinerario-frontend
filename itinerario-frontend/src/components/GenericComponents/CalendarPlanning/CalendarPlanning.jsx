@@ -8,13 +8,20 @@ import PropTypes from 'prop-types'
 // import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 // import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { useState } from 'react';
+import { getDateCalendarUtilityClass, getMonthCalendarUtilityClass } from '@mui/x-date-pickers';
 
-export default function ResponsiveDatePickers({ labelText ,changeFunction }) {
+export default function ResponsiveDatePickers({ labelText, changeFunction }) {
 
     const handleOnChange = async (value) => {
-         await changeFunction(value.toISOString())
-    }
 
+        const timeChain = value.toISOString();
+        const dateTimeUTC = new Date(timeChain);
+        
+        const date = `${dateTimeUTC.getFullYear()}-${dateTimeUTC.getMonth() + 1}-${dateTimeUTC.getDate()}`
+        console.log(date)
+
+        await changeFunction(date)
+    }
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -28,7 +35,7 @@ export default function ResponsiveDatePickers({ labelText ,changeFunction }) {
             >
 
                 <DemoItem label={labelText}>
-                    <DesktopDatePicker defaultValue={dayjs('2022-04-17')} onChange={handleOnChange}/>
+                    <DesktopDatePicker defaultValue={dayjs('2023-12-16')} onChange={handleOnChange} />
                 </DemoItem>
 
                 {/* <DemoItem label="Mobile variant">
@@ -40,7 +47,7 @@ export default function ResponsiveDatePickers({ labelText ,changeFunction }) {
                 <DemoItem label="Static variant">
                     <StaticDatePicker defaultValue={dayjs('2022-04-17')} />
                 </DemoItem> */}
-                
+
             </DemoContainer>
         </LocalizationProvider>
     );

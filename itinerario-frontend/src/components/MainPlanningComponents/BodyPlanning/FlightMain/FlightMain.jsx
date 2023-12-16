@@ -9,20 +9,16 @@ import { mainContext } from '../../../../contexts/mainContext';
 
 function FlightMain() {
 
-
     const { mainData, setMainData } = useContext(mainContext)
     const [selectedFlight, setSelectedFlight] = useState(false)
 
+    const origin = mainData.origin.cityCode;
+    const destination = mainData.destination.cityCode
+    const dateGo = mainData.dateGoing
+    const dateReturn = mainData.dateBack
 
-    // let origin = mainData.origin.cityCode;
-
-    // useEffect(() => {
-
-    //     let destination = mainData.destination
-    //     console.log(destination)
-
-    // }, [])
-
+    console.log(dateGo)
+    console.log(dateReturn)
 
     const handleFlightSelect = (flight, isOneWay) => {
         if (selectedFlight === flight) {
@@ -53,13 +49,16 @@ function FlightMain() {
         }, []) */
 
     useEffect(() => {
-        fetchDataV2('MAD', 'BCN', '2024-02-02', setFlightListOneWay)
-        fetchDataV2('BCN', 'MAD', '2024-02-15', setFlightListReturn)
+        fetchDataV2(origin, destination, dateGo, setFlightListOneWay)
+        fetchDataV2(destination, origin, dateReturn, setFlightListReturn)
     }, [])
 
     const renderFlightListOneWay = (flightList) => {
-        return flightList
+        console.log("ida", flightList)
+        return flightList.filter((flight) => flight.depart_date === mainData.dateGoing)
+
             .map((flight, index) => {
+                console.log(flight)
                 return (
                     <FlightCard
                         key={index}
@@ -74,18 +73,21 @@ function FlightMain() {
     }
 
     const renderFlightListReturn = (flightList) => {
-        return flightList.map((flight, index) => {
-            return (
-                <FlightCard
-                    key={index}
-                    data={flight}
-                    date={flight.depart_date}
-                    classIcon={'rotarIzq'}
-                    onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, false)}
-                    isSelected={selectedFlight === flight}
-                />
-            )
-        })
+        return flightList.filter((flight) => flight.depart_date === mainData.dateBack)
+            .map((flight, index) => {
+                return (
+                    <FlightCard
+                        key={index}
+                        data={flight}
+                        date={flight.depart_date}
+                        classIcon={'rotarIzq'}
+                        onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, false)}
+                        isSelected={selectedFlight === flight}
+                    />
+                )
+
+            })
+
     }
 
     return (
@@ -102,7 +104,6 @@ function FlightMain() {
                         {renderFlightListOneWay(flightListOneWay)}
                     </Box>
                 </Box>
-
                 {/* VUELTA  */}
                 <Box>
                     <Typography variant='h4' sx={{ mb: 2 }}>Return</Typography>
@@ -113,6 +114,7 @@ function FlightMain() {
             </Box>
         </Box>
     )
+
 }
 
 export default FlightMain

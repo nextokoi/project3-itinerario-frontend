@@ -31,7 +31,7 @@ function SearchBar({ placeholder, inputChange }) {
 
     })
 
-    inputChange(filteredData)
+    inputChange(filteredData[0])
 
   }
 
@@ -47,8 +47,8 @@ function SearchBar({ placeholder, inputChange }) {
           <img
             loading="lazy"
             width="20"
-            // srcSet={`https://flagcdn.com/w40/${option.cityCode.toLowerCase()}.png 2x`}
-            // src={`https://flagcdn.com/w20/${option.cityCode.toLowerCase()}.png`}
+            srcSet={`https://flagcdn.com/w40/${option.countryCode.toLowerCase()}.png 2x`}
+            src={`https://flagcdn.com/w20/${option.countryCode.toLowerCase()}.png`}
             alt=""
           />
           {option.name}
