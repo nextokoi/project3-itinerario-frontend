@@ -13,13 +13,14 @@ import { mainContext } from '../contexts/mainContext'
 
 export default function PlanningPage() {
     const { mainData } = useContext(mainContext)
+
+    useEffect(()=>{
+        console.log(mainData)
+    },[mainData])
     
-    console.log('Origin ', mainData.origin)
-    console.log('Destination ', mainData.destination)
 
     const [stepperStatus, setStepperStatus] = useState(0)
     useEffect(() => {
-        console.log(stepperStatus)
     }, [stepperStatus])
 
     const handleNavigation = (textValue) => {

@@ -5,3 +5,10 @@
 .rotarIzq {
     transform: rotate(270deg);
 }
+
+.selected{
+    border: 10px solid green;
+}
+.unselected{
+    border: "";
+}

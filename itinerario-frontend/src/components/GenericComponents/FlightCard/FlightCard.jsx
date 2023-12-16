@@ -14,7 +14,7 @@ export default function FlightCard({ data, classIcon, date }) {
 
     return (
 
-        <Card sx={{ minWidth: 275, border: '1px solid #1976d2', marginY: '10px', maxWidth: 450 }}>
+        <Card sx={{ minWidth: 275, border: '1px solid #1976d2', marginY: '10px', maxWidth: 450 }} className='unselected'>
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'start', padding: '15px', gap: '20px' }}>
 

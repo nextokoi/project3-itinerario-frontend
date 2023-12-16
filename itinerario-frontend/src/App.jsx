@@ -10,9 +10,12 @@ import { mainContext } from './contexts/mainContext'
 function App() {
 
   const [mainData, setMainData] = useState({
-    date: '',
+    dateGoing: '',
+    dateBack: '',
     origin: '',
     destination: '',
+    flightGoing: {},
+    flightBack : {},
     activities: [],
     lodging: ''
   })
@@ -23,8 +26,8 @@ function App() {
     const fetchData = async () => {
 
       await login({
-        "email": "peter@gmail.com",
-        "password": "111111111",
+        "email": "dani@gmail.com",
+        "password": "12345678",
       })
 
       await getAllUsers()

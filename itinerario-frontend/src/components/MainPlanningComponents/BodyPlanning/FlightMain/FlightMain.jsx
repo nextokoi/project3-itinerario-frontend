@@ -2,11 +2,16 @@ import FlightCard from '../../../GenericComponents/FlightCard/FlightCard'
 import { Box } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 /* import fetchData from '../../../../services/flightExternalService'; */
 import fetchDataV2 from '../../../../services/flightExternalServiceV2';
+import { mainContext } from '../../../../contexts/mainContext';
 
 function FlightMain() {
+
+    
+    const {mainData,setMainData} = useContext(mainContext)
+    
 
     const [flightListOneWay, setFlightListOneWay] = useState([])
     const [flightListReturn, setFlightListReturn] = useState([])
@@ -37,7 +42,6 @@ function FlightMain() {
 
     const renderFlightListReturn = (flightList) => {
         return flightList.map((flight, index) => {
-            console.log(flight)
             return (
                 <FlightCard
                     key={index}

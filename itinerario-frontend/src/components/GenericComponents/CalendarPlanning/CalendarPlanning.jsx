@@ -7,8 +7,15 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import PropTypes from 'prop-types'
 // import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 // import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import { useState } from 'react';
 
-export default function ResponsiveDatePickers({ labelText }) {
+export default function ResponsiveDatePickers({ labelText ,changeFunction }) {
+
+    const handleOnChange = async (value) => {
+         await changeFunction(value.toISOString())
+    }
+
+
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer
@@ -21,7 +28,7 @@ export default function ResponsiveDatePickers({ labelText }) {
             >
 
                 <DemoItem label={labelText}>
-                    <DesktopDatePicker defaultValue={dayjs('2022-04-17')} />
+                    <DesktopDatePicker defaultValue={dayjs('2022-04-17')} onChange={handleOnChange}/>
                 </DemoItem>
 
                 {/* <DemoItem label="Mobile variant">
