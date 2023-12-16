@@ -21,7 +21,7 @@ export default function FlightCard({ data, classIcon, date, onSelect, isSelected
 
     return (
 
-        <Card sx={{ minWidth: 275, marginY: '10px', maxWidth: 450, cursor: 'pointer' }} className={isSelected ? 'selected' : 'unselected'} onClick={handleClick}>
+        <Card sx={{ minWidth: 275, marginY: '10px', maxWidth: 450, cursor: 'pointer', "&:hover":{border: '3px solid green'}}} className={isSelected ? 'selected' : 'unselected'} onClick={handleClick}>
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'start', padding: '15px', gap: '20px' }}>
 
@@ -36,7 +36,7 @@ export default function FlightCard({ data, classIcon, date, onSelect, isSelected
 
                     <Box>
                         <Typography>
-                            {data.flightCompanyName}
+                            {data.airline_main}
                         </Typography>
                         <Typography>
                             <strong>{date}</strong>

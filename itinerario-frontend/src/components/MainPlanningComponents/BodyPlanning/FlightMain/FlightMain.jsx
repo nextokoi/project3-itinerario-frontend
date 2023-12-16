@@ -42,14 +42,14 @@ function FlightMain() {
         }, []) */
 
     useEffect(() => {
-        fetchDataV2('MAD', 'BCN', '2024-01', setFlightListOneWay)
-        fetchDataV2('BCN', 'MAD', '2024-01', setFlightListReturn)
+        fetchDataV2('MAD', 'BCN', '2024-02-02', setFlightListOneWay)
+        fetchDataV2('BCN', 'MAD', '2024-02-15', setFlightListReturn)
     }, [])
 
     const renderFlightListOneWay = (flightList) => {
-        return flightList.map((flight, index) => {
-
-            return (
+        return flightList
+            .map((flight, index) => {
+                return (
                 <FlightCard
                     key={index}
                     data={flight}

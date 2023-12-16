@@ -5,7 +5,7 @@ import ActivitySelectedCard from '../../../GenericComponents/ActivitySelectedCar
 import ButtonNavigation from './../../../GenericComponents/ButtonNavigation/ButtonNavigation'
 import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage'
 
-function ActivityMain({ handleNavigation }) {
+function ActivityMain() {
     return (
         <Box sx={{ px: 10, my: 5 }}>
             <Typography variant="h3" sx={{ mb: 5 }}>Keep moving</Typography>
@@ -25,12 +25,6 @@ function ActivityMain({ handleNavigation }) {
                     <ActivitySelectedCard cardImg={'./../../../../../photos/shrine.jpg'} cardTitle={'Hakone Shrine'} cardSubtitle={'Jinja, Hakone'} />
                 </Box>
             </Box>
-
-            {/* <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-            <ButtonNavigation handleNavigation={handleNavigation} text={'Back'}/>
-            <ButtonNavigation handleNavigation={handleNavigation} text={'Next'}/>
-            </Box> */}
-
         </Box>
     )
 }
