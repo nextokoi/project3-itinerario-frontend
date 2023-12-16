@@ -1,8 +1,13 @@
+import LogInForm from "../components/GenericComponents/LogInForm/LogInForm"
+import SignUpForm from "../components/GenericComponents/SignUpForm/SignUpForm"
+
+
 function About() {
 
   return (
 
-    <div>About</div>
+    <SignUpForm/>
+    //<LogInForm/>
 
   )
 }
