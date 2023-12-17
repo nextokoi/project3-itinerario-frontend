@@ -17,7 +17,8 @@ function App() {
     flightGoing: {},
     flightBack: {},
     activities: [],
-    lodging: ''
+    lodging: [],
+    days : 0
   })
 
   const data = { mainData, setMainData }

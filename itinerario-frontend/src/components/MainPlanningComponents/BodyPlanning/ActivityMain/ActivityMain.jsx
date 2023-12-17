@@ -17,10 +17,15 @@ function ActivityMain() {
 
     const {mainData,setMainData} = useContext(mainContext)
 
-
     useEffect(()=>{
         setNumberOfDays(calcularDiferenciaEnDias(mainData.dateGoing,mainData.dateBack))
+        setMainData((prevData) => ({
+            ...prevData,
+            days: numberOfDays
+        }))
     },[])
+
+    
     
     //  useEffect(()=>{
     //      console.log(selectedActivities)
@@ -104,26 +109,12 @@ function ActivityMain() {
             <Typography variant='body1' sx={{ mb: 2 }}>We recommend these experiences for your trip</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: 5 }}>
 
-                {/* <ActivityCard cardImg={'./../../../../../photos/onsen.jpg'} cardText={'Onsen'} />
-                <ActivityCard cardImg={'./../../../../../photos/shrine.jpg'} cardText={'Hakone Shrine'} />
-                 */}
-
                  {renderActivities()}
 
             </Box>
             <Box sx={{ mb: 5 }}>
 
-                {/* <Box sx={{ mb: 2 }}>
-                    <Typography variant="h6">Day 1</Typography>
-                    <ActivitySelectedCard cardImg={'./../../../../../photos/onsen.jpg'} cardTitle={'Tenzan Tohji-kyo'} cardSubtitle={'Yumoto, Hakone'} />
-                </Box>
-                <Box>
-                    <Typography variant="h6">Day 2</Typography>
-                    <ActivitySelectedCard cardImg={'./../../../../../photos/shrine.jpg'} cardTitle={'Hakone Shrine'} cardSubtitle={'Jinja, Hakone'} />
-                </Box> */}
-
                 {renderSelectedActivities()}
-
 
             </Box>
         </Box>
