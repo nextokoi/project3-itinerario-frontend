@@ -7,6 +7,7 @@ import About from '../pages/About.jsx'
 import PlanningPage from '../pages/PlanningPage.jsx'
 import { LogInPage } from '../pages/LogInPage.jsx'
 import SignUpPage from '../pages/SignUpPage.jsx'
+import Profile from '../pages/MyProfile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,13 +27,17 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />
-      },{
+      }, {
         path: "login",
         element: <LogInPage />
       },
       {
         path: "signup",
         element: <SignUpPage />
+      },
+      {
+        path: "profile",
+        element: <Profile />
       }
     ]
   }
