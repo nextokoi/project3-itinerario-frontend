@@ -20,7 +20,7 @@ export async function signup(signupData) {
     localStorage.setItem('token', data.token)
     return data
   }
-  catch{
+  catch (error){
     console.log(error.message)
   }
 }

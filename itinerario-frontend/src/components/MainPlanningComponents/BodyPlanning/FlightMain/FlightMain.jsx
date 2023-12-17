@@ -1,72 +1,99 @@
 import FlightCard from '../../../GenericComponents/FlightCard/FlightCard'
 import { Box } from '@mui/material'
-import Typography from '@mui/material/Typography';
-import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage';
-import { useContext, useEffect, useState } from 'react';
-/* import fetchData from '../../../../services/flightExternalService'; */
-import fetchDataV2 from '../../../../services/flightExternalServiceV2';
-import { mainContext } from '../../../../contexts/mainContext';
+import Typography from '@mui/material/Typography'
+import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage'
+import { useContext, useEffect, useState } from 'react'
+import fetchData from '../../../../services/flightExternalService'
+import { mainContext } from '../../../../contexts/mainContext'
 
 function FlightMain() {
 
     const { mainData, setMainData } = useContext(mainContext)
-    const [selectedFlight, setSelectedFlight] = useState(false)
 
-    const origin = mainData.origin.cityCode;
-    const destination = mainData.destination.cityCode
-    const dateGo = mainData.dateGoing
-    const dateReturn = mainData.dateBack
-
-    console.log(dateGo)
-    console.log(dateReturn)
-
-    const handleFlightSelect = (flight, isOneWay) => {
-        if (selectedFlight === flight) {
-            setSelectedFlight(null);
-            setMainData((prevData) => ({
-                ...prevData,
-                flightGoing: isOneWay ? null : prevData.flightGoing,
-                flightBack: !isOneWay ? null : prevData.flightBack,
-            }));
-        } else {
-            // Seleccionar el nuevo vuelo
-            setSelectedFlight(flight);
-            setMainData((prevData) => ({
-                ...prevData,
-                flightGoing: isOneWay ? flight : prevData.flightGoing,
-                flightBack: !isOneWay ? flight : prevData.flightBack,
-            }));
-        }
-
-    }
+    const [selectedFlightGoing, setSelectedFlightGoing] = useState(false)
+    const [selectedFlightBack, setSelectedFlightBack] = useState(false)
 
     const [flightListOneWay, setFlightListOneWay] = useState([])
     const [flightListReturn, setFlightListReturn] = useState([])
 
-    /*     useEffect(() => {
-            fetchData('MAD', 'BCN', '2023-12-20', setFlightListOneWay)
-            fetchData('BCN', 'MAD', '2023-12-21', setFlightListReturn)
-        }, []) */
+    const { origin, destination, dateGoing, dateBack } = mainData
+
+    //Fetch flight data
 
     useEffect(() => {
-        fetchDataV2(origin, destination, dateGo, setFlightListOneWay)
-        fetchDataV2(destination, origin, dateReturn, setFlightListReturn)
-    }, [])
+        fetchData(origin.cityCode, destination.cityCode, dateGoing, setFlightListOneWay)
+        fetchData(destination.cityCode, origin.cityCode, dateBack, setFlightListReturn)
+    }, [destination.cityCode, origin.cityCode, dateGoing, dateBack])
+
+    const airlines = [
+        {
+            code : "UX",
+            name: "Air Europa",
+            imageLogo: "./public/photos/logo-UX.png"
+        },
+        {
+            code: "RYR",
+            name: "Ryanair",
+            imageLogo: "./public/photos/logo-FR.png"
+        },
+        {
+            code: "IBE",
+            name: "Iberia",
+            imageLogo: "./public/photos/logo-IB.png"
+        }
+    ]
+
+
+    //Select and unselect flight cards
+
+    const handleFlightSelectGoing = (flight) => {
+        if (selectedFlightGoing === flight) {
+            setSelectedFlightGoing(null)
+            setMainData((prevData) => ({
+                ...prevData,
+                flightGoing: null
+            }))
+        } else {
+            setSelectedFlightGoing(flight)
+            setMainData((prevData) => ({
+                ...prevData,
+                flightGoing: flight
+            }))
+        }
+    }
+
+    const handleFlightSelectBack = (flight) => {
+        if (selectedFlightBack === flight) {
+            setSelectedFlightBack(null)
+            setMainData((prevData) => ({
+                ...prevData,
+                flightBack: null
+            }))
+        } else {
+            setSelectedFlightBack(flight)
+            setMainData((prevData) => ({
+                ...prevData,
+                flightBack: flight
+            }))
+        }
+
+    }
+
+    // filtering and mapping the list of flights cards
 
     const renderFlightListOneWay = (flightList) => {
-        console.log("ida", flightList)
         return flightList.filter((flight) => flight.depart_date === mainData.dateGoing)
-
             .map((flight, index) => {
-                console.log(flight)
                 return (
                     <FlightCard
                         key={index}
                         data={flight}
                         date={flight.depart_date}
-                        classIcon={'rotarDcha'}
-                        onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, true)}
-                        isSelected={selectedFlight === flight}
+                        onSelect={(selectedFlightGoing) => handleFlightSelectGoing(selectedFlightGoing)}
+                        isSelected={selectedFlightGoing === flight}
+                        airlines={airlines}
+                        origin={destination.name}
+                        destination={origin.name}
                     />
                 )
             })
@@ -80,9 +107,11 @@ function FlightMain() {
                         key={index}
                         data={flight}
                         date={flight.depart_date}
-                        classIcon={'rotarIzq'}
-                        onSelect={(selectedFlight) => handleFlightSelect(selectedFlight, false)}
-                        isSelected={selectedFlight === flight}
+                        onSelect={(selectedFlightBack) => handleFlightSelectBack(selectedFlightBack)}
+                        isSelected={selectedFlightBack === flight}
+                        airlines={airlines}
+                        origin={origin.name}
+                        destination={destination.name}
                     />
                 )
 
@@ -97,17 +126,17 @@ function FlightMain() {
             </Box>
             <InfoMessage />
             <Box sx={{ mb: 10 }}>
-                {/* IDA  */}
+
                 <Box sx={{ mb: 10 }}>
                     <Typography variant='h4' sx={{ mb: 2 }}>One-Way</Typography>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                         {renderFlightListOneWay(flightListOneWay)}
                     </Box>
                 </Box>
-                {/* VUELTA  */}
+
                 <Box>
                     <Typography variant='h4' sx={{ mb: 2 }}>Return</Typography>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                         {renderFlightListReturn(flightListReturn)}
                     </Box>
                 </Box>
