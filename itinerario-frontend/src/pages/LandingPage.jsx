@@ -31,11 +31,11 @@ function LandingPage() {
   }
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log("mainData: ", mainData)
+  //   console.log("mainData: ", mainData)
 
-  }, [mainData])
+  // }, [mainData])
 
   const heroImage = './../../public/photos/hero-image.jpg'
 

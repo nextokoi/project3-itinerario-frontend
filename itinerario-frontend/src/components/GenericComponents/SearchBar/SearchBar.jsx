@@ -14,7 +14,6 @@ function SearchBar({ placeholder, inputChange }) {
   const fetchData = async () => {
     const data = await getAllLocations()
     setLocation(data)
-    console.log("Data: ", data)
 
   }
 

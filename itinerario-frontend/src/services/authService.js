@@ -4,7 +4,6 @@ export async function login(loginData) {
 
   try {
     const { data } = await api.post('/auth/login', loginData)
-    console.log("u made it!!!!")
     localStorage.setItem('token', data.token)
     return data
   } catch (error) {

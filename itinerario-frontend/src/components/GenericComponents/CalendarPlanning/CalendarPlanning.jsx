@@ -18,7 +18,6 @@ export default function ResponsiveDatePickers({ labelText, changeFunction }) {
         const dateTimeUTC = new Date(timeChain);
         
         const date = `${dateTimeUTC.getFullYear()}-${dateTimeUTC.getMonth() + 1}-${dateTimeUTC.getDate()}`
-        console.log(date)
 
         await changeFunction(date)
     }

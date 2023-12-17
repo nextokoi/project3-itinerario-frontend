@@ -1,85 +1,97 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 import ActivityCard from '../../../GenericComponents/ActivityCard/ActivityCard'
 import './ActivityMain.css'
 import ActivitySelectedCard from '../../../GenericComponents/ActivitySelectedCard/ActivitySelectedCard'
 import ButtonNavigation from './../../../GenericComponents/ButtonNavigation/ButtonNavigation'
 import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import { getAllActivities } from '../../../../services/activitiesService'
+import { mainContext } from '../../../../contexts/mainContext'
 
 
 function ActivityMain() {
 
     const [activities, setActivities] = useState([])
     const [selectedActivities, setSelectedActivities] = useState([])
+    const [numberOfDays,setNumberOfDays] = useState()
+
+    const {mainData,setMainData} = useContext(mainContext)
+
+
+    useEffect(()=>{
+        setNumberOfDays(calcularDiferenciaEnDias(mainData.dateGoing,mainData.dateBack))
+    },[])
+    
+    //  useEffect(()=>{
+    //      console.log(selectedActivities)
+    //  },[selectedActivities])
 
     useEffect(() => {
 
         const fetchActivities = async () => {
-
             const data = await getAllActivities()
             // console.log("Estas son las actividades: ", data)
             setActivities(data)
-
         }
-
         fetchActivities()
-
     }, [])
 
-    useEffect(() => {
+    const handleCardClick = async (activity) => {
+        if(selectedActivities.length >= numberOfDays){
 
-        console.log("Estas son las Actividades: ", activities)
-
-    }, [])
-
-
-    const handleCardClick = (e) => {
-
-
-        setSelectedActivities(
+        }else{
+        await setSelectedActivities(
             [
                 ...selectedActivities,
-                e.target
+                activity
             ]
         )
-
-        console.log("cosas", selectedActivities)
-        console.log(selectedActivities.length)
+    }
     }
 
-            
+    const handleDeleteClick = (activity) => {
+       let arrAux = [...selectedActivities]
+       let result = selectedActivities.findIndex((elem)=>{
+        return elem.id === activity.id
+       })
+       arrAux.splice(result,1)
+       setSelectedActivities(
+        [
+            ...arrAux
+        ]
+    )
+    }
 
     const renderActivities = () => {
         return activities.map((activity, index) => {
             return (
-
                 <ActivityCard key={index}
-
-                    cardImg={'./../../../../../photos/onsen.jpg'}
-                    cardText={activity.name}
+                    activityData={activity}
                     clickHandle={handleCardClick}
-
                 />
             )
         })
     }
 
-    useEffect(() => {
-
-        renderSelectedActivities()
-
-    }, [selectedActivities])
-
     const renderSelectedActivities = () => {
 
         return selectedActivities.map((activity, index) => {
-            return (
-                <>
+            if(index>=numberOfDays) return (<></>)
 
-                    {activity.outerHTML}
 
-                </>
+            return (<>
+
+                <Divider/>
+                <ActivitySelectedCard key={index}
+
+                    activityData={activity}
+                    cardTitle={`Day ${index+1}`}
+                    clickHandle={handleDeleteClick}
+
+                />
+                
+                <Divider/>
+            </>
             )
         })
 
@@ -96,7 +108,7 @@ function ActivityMain() {
                 <ActivityCard cardImg={'./../../../../../photos/shrine.jpg'} cardText={'Hakone Shrine'} />
                  */}
 
-                {renderActivities()}
+                 {renderActivities()}
 
             </Box>
             <Box sx={{ mb: 5 }}>
@@ -117,5 +129,21 @@ function ActivityMain() {
         </Box>
     )
 }
+
+function calcularDiferenciaEnDias(fecha1, fecha2) {
+    // Convierte las fechas a objetos Date
+    const fechaInicio = new Date(fecha1);
+    const fechaFin = new Date(fecha2);
+
+    // Calcula la diferencia en milisegundos
+    const diferenciaEnMilisegundos = fechaFin - fechaInicio;
+
+    // Convierte la diferencia a días
+    const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
+
+    // Redondea el resultado a un número entero
+    return Math.round(diferenciaEnDias);
+}
+
 
 export default ActivityMain
