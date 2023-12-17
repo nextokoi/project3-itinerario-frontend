@@ -4,13 +4,25 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography';
-export default function ActivityCard({ cardImg, cardText }) {
+import { useState } from 'react';
+
+export default function ActivityCard({ cardImg, cardText, clickHandle }) {
+
+  const [selected, setSelected] = useState(false)
+
+  const handleClick = (e) => {
+    setSelected(!selected)
+    console.log("selected")
+    clickHandle(e)
+
+  }
+
   return (
-    <Card sx={{ width: 500}}>
+    <Card sx={{ width: 500 }} onClick={handleClick}>
       <CardContent sx={{ height: '300px', backgroundImage: `url(${cardImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <CardActions sx={{ height: '100%', width: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-            <Typography variant="h5" sx={{mb: 3, p: 2, color: '#fff', backgroundColor: '#3a393986', borderRadius: 2}}>{ cardText }</Typography>
-            <Button variant="contained" size="small">View More</Button>
+          <Typography variant="h5" sx={{ mb: 3, p: 2, color: '#fff', backgroundColor: '#3a393986', borderRadius: 2 }}>{cardText}</Typography>
+          <Button variant="contained" size="small">View More</Button>
         </CardActions>
       </CardContent>
     </Card>
@@ -18,6 +30,7 @@ export default function ActivityCard({ cardImg, cardText }) {
 }
 
 ActivityCard.propTypes = {
-    cardImg : PropTypes.string,
-    cardText : PropTypes.string
+  cardImg: PropTypes.string,
+  cardText: PropTypes.string,
+  onActivitySelect: PropTypes.func.isRequired
 }
