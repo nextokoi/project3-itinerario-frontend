@@ -19,11 +19,15 @@ function ActivityMain() {
 
     useEffect(()=>{
         setNumberOfDays(calcularDiferenciaEnDias(mainData.dateGoing,mainData.dateBack))
+    },[])
+
+
+    useEffect(()=>{
         setMainData((prevData) => ({
             ...prevData,
             days: numberOfDays
         }))
-    },[])
+    },[numberOfDays])
 
     
     
@@ -42,6 +46,7 @@ function ActivityMain() {
     }, [])
 
     const handleCardClick = async (activity) => {
+        console.log(mainData)
         if(selectedActivities.length >= numberOfDays){
 
         }else{
