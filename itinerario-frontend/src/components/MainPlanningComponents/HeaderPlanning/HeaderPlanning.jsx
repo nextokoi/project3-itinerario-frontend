@@ -2,9 +2,15 @@ import { Box, Typography } from "@mui/material"
 import BasicBreadcrumbs from "../../GenericComponents/BreadCrumbs/BreadCrumbs"
 import CustomizedSteppers from "./../../GenericComponents/Stepper/Stepper"
 import PropTypes from 'prop-types'
+import { useContext } from "react"
+import { mainContext } from "../../../contexts/mainContext"
+
 
 function HeaderPlanning({ stepperStatus }) {
-  const destinationImg = './../../public/photos/destinoEjemplo.jpg'
+
+  const { mainData } = useContext(mainContext)
+  const destinationImg = mainData.destination.imageURL
+
   return (
     <div>
       <Box sx={{ margin: '30px' }}>
@@ -15,7 +21,7 @@ function HeaderPlanning({ stepperStatus }) {
         <CustomizedSteppers stepperStatus={stepperStatus} />
       </Box>
 
-      <Box sx={{display: 'flex', justifyContent: 'center', my: 10}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', my: 10 }}>
         <Box
           sx={{
             position: 'relative',
@@ -47,7 +53,7 @@ function HeaderPlanning({ stepperStatus }) {
               gap: '10px',
               pb: 15,
               pl: 5,
-              color: '#fff',       
+              color: '#fff',
             }}
           >
             <Typography variant="h4">City</Typography>

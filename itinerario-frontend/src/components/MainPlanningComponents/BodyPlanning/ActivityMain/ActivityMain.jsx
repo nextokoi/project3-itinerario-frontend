@@ -73,7 +73,6 @@ function ActivityMain() {
         } else {
             return <Typography variant='body1'>You haven&apos;t selected any activity yet.</Typography>
         }
-
     }
 
     return (

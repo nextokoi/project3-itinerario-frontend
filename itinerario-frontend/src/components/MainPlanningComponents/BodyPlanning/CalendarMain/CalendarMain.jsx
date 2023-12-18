@@ -13,7 +13,7 @@ export default function CalendarComponent() {
             dateGoing: date
         }))
     }
-
+    
     const handleOnChangeBack = (date) => {
         setMainData(prev => ({
             ...prev,
@@ -49,7 +49,7 @@ export default function CalendarComponent() {
     }
 
     return (
-        <Box sx={{display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Box sx={{
                 display: "flex",
                 gap: "30px",
