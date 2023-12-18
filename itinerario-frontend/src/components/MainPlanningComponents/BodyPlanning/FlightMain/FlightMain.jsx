@@ -92,8 +92,8 @@ function FlightMain() {
                         onSelect={(selectedFlightGoing) => handleFlightSelectGoing(selectedFlightGoing)}
                         isSelected={selectedFlightGoing === flight}
                         airlines={airlines}
-                        origin={destination.name}
-                        destination={origin.name}
+                        origin={origin.name}
+                        destination={destination.name}
                     />
                 )
             })
@@ -110,8 +110,8 @@ function FlightMain() {
                         onSelect={(selectedFlightBack) => handleFlightSelectBack(selectedFlightBack)}
                         isSelected={selectedFlightBack === flight}
                         airlines={airlines}
-                        origin={origin.name}
-                        destination={destination.name}
+                        origin={destination.name}
+                        destination={origin.name}
                     />
                 )
 

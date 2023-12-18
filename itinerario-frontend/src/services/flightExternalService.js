@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const fetchData = async (destination, origin, month, setFlightList) => {
+const fetchData = async (origin, destination, month, setFlightList) => {
     const options = {
     method: 'GET',
     url: 'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/month-matrix',
     params: {
-        destination,
         origin,
+        destination,
         currency: 'EUR',
         month
     },
