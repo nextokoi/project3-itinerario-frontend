@@ -7,7 +7,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Footer() {
 
-  const footerElements = [{ name: 'PLANNINGqqq', path: 'planning' }, { name: 'CONTACT', path: 'contact' }, { name: 'ABOUT', path: 'about' }]
+  const footerElements = [{ name: 'PRIVACY', path: 'privacy' }, { name: 'CONTACT', path: 'contact' }, { name: 'ABOUT', path: 'about' }]
 
   const footerArrElements = footerElements.map((element) => {
 

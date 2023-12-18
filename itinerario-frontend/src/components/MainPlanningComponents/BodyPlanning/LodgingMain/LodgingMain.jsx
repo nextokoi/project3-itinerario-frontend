@@ -5,50 +5,47 @@ import ActivitySelectedCard from '../../../GenericComponents/ActivitySelectedCar
 import ButtonNavigation from './../../../GenericComponents/ButtonNavigation/ButtonNavigation'
 import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage'
 import { getAllActivities } from '../../../../services/activitiesService'
-import {useEffect, useState,useContext} from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { mainContext } from '../../../../contexts/mainContext'
 
 
 function LodgingMain() {
 
-    const [lodgings,setLodgings] = useState([])
+    const [lodgings, setLodgings] = useState([])
     const [selectedLodgings, setSelectedLodgings] = useState([])
-    const {mainData,setMainData} = useContext(mainContext)
+
+    const { mainData, setMainData } = useContext(mainContext)
 
     useEffect(() => {
         const fetchLodgings = async () => {
             const data = await getAllActivities()
-            // console.log("Estas son las actividades: ", data)
             setLodgings(data)
         }
         fetchLodgings()
     }, [])
 
     const handleCardClick = async (lodging) => {
-        console.log(mainData)
-        if(selectedLodgings.length >= mainData.days){
+        if (selectedLodgings.length !== mainData.days) {
+            setSelectedLodgings([...selectedLodgings, lodging])
+            setMainData(prevData => ({
+                ...prevData,
+                lodging: [...selectedLodgings, lodging]
+            }))
+        }
+    }
 
-        }else{
-        await setSelectedLodgings(
-            [
-                ...selectedLodgings,
-                lodging
-            ]
-        )
-    }
-    }
     const handleDeleteClick = (lodging) => {
         let arrAux = [...selectedLodgings]
-        let result = selectedLodgings.findIndex((elem)=>{
-         return elem.id === lodging.id
+        let result = selectedLodgings.findIndex((elem) => {
+            return elem.id === lodging.id
         })
-        arrAux.splice(result,1)
-        setSelectedLodgings(
-         [
-             ...arrAux
-         ]
-     )
-     }
+        arrAux.splice(result, 1)
+        setSelectedLodgings([...arrAux])
+        setMainData(prev => ({
+            ...prev,
+            lodging: [...arrAux]
+        }))
+    }
 
     const renderLodgings = () => {
         return lodgings.map((lodging, index) => {
@@ -62,30 +59,31 @@ function LodgingMain() {
     }
 
     const renderSelectedLodgings = () => {
-        return selectedLodgings.map((lodging, index) => {
-            if(index>=mainData.days) return (<></>)
-            return (<>
-                <Divider/>
-                <ActivitySelectedCard key={index}
-                    activityData={lodging}
-                    cardTitle={`Day ${index+1}`}
-                    clickHandle={handleDeleteClick}
-                />
-                <Divider/>
-            </>
-            )
-        })
-
+        if (selectedLodgings.length !== 0) {
+            return selectedLodgings.map((lodging, index) => {
+                return (
+                    <Box key={index}>
+                        <Typography variant="h6">{`Day ${index + 1}`}</Typography>
+                        <ActivitySelectedCard
+                            activityData={lodging}
+                            clickHandle={handleDeleteClick}
+                        />
+                    </Box>
+                )
+            })
+        } else {
+            return <Typography variant='body1'>You haven&apos;t selected any lodging yet.</Typography>
+        }
     }
 
     return (
         <Box sx={{ px: 10, my: 5 }}>
             <Typography variant="h3" sx={{ mb: 5 }}>Choose Lodging</Typography>
             <InfoMessage />
-            <Typography variant='body1' sx={{ mb: 2 }}>These are the most visited accomodations of the selected destination :</Typography>
+            <Typography variant='body1' sx={{ mb: 2 }}>We recommend these lodgings for your trip</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: 5 }}>
 
-                 {renderLodgings()}
+                {renderLodgings()}
 
             </Box>
             <Box sx={{ mb: 5 }}>

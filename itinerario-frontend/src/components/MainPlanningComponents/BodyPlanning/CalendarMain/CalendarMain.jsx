@@ -1,11 +1,11 @@
 import { Box } from '@mui/material'
 import ResponsiveDatePickers from '../../../GenericComponents/CalendarPlanning/CalendarPlanning.jsx'
-import ButtonNavigation from '../../../GenericComponents/ButtonNavigation/ButtonNavigation.jsx'
 import { useContext, useState, useEffect } from 'react'
 import { mainContext } from '../../../../contexts/mainContext.js'
 
-export default function CalendarComponent({ handleNavigation }) {
+export default function CalendarComponent() {
     const { mainData, setMainData } = useContext(mainContext)
+    const [numberOfDays, setNumberOfDays] = useState()
 
     const handleOnChangeGoing = (date) => {
         setMainData(prev => ({
@@ -14,8 +14,6 @@ export default function CalendarComponent({ handleNavigation }) {
         }))
     }
 
-
-
     const handleOnChangeBack = (date) => {
         setMainData(prev => ({
             ...prev,
@@ -23,31 +21,45 @@ export default function CalendarComponent({ handleNavigation }) {
         }))
     }
 
+    useEffect(() => {
+        setNumberOfDays(calculateDifferenceInDays(mainData.dateGoing, mainData.dateBack))
+    }, [mainData.dateGoing, mainData.dateBack])
+
+
+    useEffect(() => {
+        setMainData((prevData) => ({
+            ...prevData,
+            days: numberOfDays
+        }))
+    }, [numberOfDays, setMainData])
+
+    function calculateDifferenceInDays(date1, date2) {
+        // Convert dates to Date objects
+        const startDate = new Date(date1);
+        const endDate = new Date(date2);
+
+        // Calculate the difference in milliseconds
+        const differenceInMilliseconds = endDate - startDate;
+
+        // Convert the difference to days
+        const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+
+        // Round the result to an integer
+        return Math.round(differenceInDays);
+    }
+
     return (
-        <>
+        <Box sx={{display: 'flex', justifyContent: 'center'}}>
             <Box sx={{
-                alignSelf: "center",
-                width: "500px",
-                height: "200px",
-                marginY: "50px",
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
                 gap: "30px",
-                borderRadius: "10px",
-                border: "1px solid #1976d2"
+                mb: 5
             }} >
 
-                <ResponsiveDatePickers labelText={"ida"} changeFunction={handleOnChangeGoing} />
-                <ResponsiveDatePickers labelText={"vuelta"} changeFunction={handleOnChangeBack} />
+                <ResponsiveDatePickers labelText={"One way"} changeFunction={handleOnChangeGoing} />
+                <ResponsiveDatePickers labelText={"Return"} changeFunction={handleOnChangeBack} />
 
             </Box>
-
-            {/* <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-                <ButtonNavigation handleNavigation={handleNavigation} text={'Back'}/>
-                <ButtonNavigation handleNavigation={handleNavigation} text={'Next'}/>
-                </Box> */}
-
-        </>
+        </Box>
     )
 }
