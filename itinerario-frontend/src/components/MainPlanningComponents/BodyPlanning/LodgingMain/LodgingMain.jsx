@@ -8,7 +8,6 @@ import { getAllActivities } from '../../../../services/activitiesService'
 import { useEffect, useState, useContext } from 'react'
 import { mainContext } from '../../../../contexts/mainContext'
 
-
 function LodgingMain() {
 
     const [lodgings, setLodgings] = useState([])
@@ -48,14 +47,16 @@ function LodgingMain() {
     }
 
     const renderLodgings = () => {
-        return lodgings.map((lodging, index) => {
-            return (
-                <ActivityCard key={index}
-                    activityData={lodging}
-                    clickHandle={handleCardClick}
-                />
-            )
-        })
+        return lodgings.filter((lodging) => lodging.isActivity === false)
+            .map((lodging, index) => {
+                return (
+                    <ActivityCard key={index}
+                        activityImg={lodging.imageURL}
+                        activityData={lodging}
+                        clickHandle={handleCardClick}
+                    />
+                )
+            })
     }
 
     const renderSelectedLodgings = () => {
@@ -65,6 +66,7 @@ function LodgingMain() {
                     <Box key={index}>
                         <Typography variant="h6">{`Day ${index + 1}`}</Typography>
                         <ActivitySelectedCard
+                            activityImg={lodging.imageURL}
                             activityData={lodging}
                             clickHandle={handleDeleteClick}
                         />

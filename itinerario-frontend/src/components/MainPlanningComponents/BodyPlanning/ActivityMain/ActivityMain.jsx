@@ -7,7 +7,6 @@ import { useEffect, useState, useContext } from 'react'
 import { getAllActivities } from '../../../../services/activitiesService'
 import { mainContext } from '../../../../contexts/mainContext'
 
-
 function ActivityMain() {
 
     const [activities, setActivities] = useState([])
@@ -47,14 +46,16 @@ function ActivityMain() {
     }
 
     const renderActivities = () => {
-        return activities.map((activity, index) => {
-            return (
-                <ActivityCard key={index}
-                    activityData={activity}
-                    clickHandle={handleCardClick}
-                />
-            )
-        })
+        return activities.filter((activity) => activity.isActivity === true).
+
+            map((activity, index) => {
+                return (
+                    <ActivityCard key={index}
+                        activityData={activity}
+                        clickHandle={handleCardClick}
+                    />
+                )
+            })
     }
 
     const renderSelectedActivities = () => {
@@ -64,6 +65,7 @@ function ActivityMain() {
                     <Box key={index}>
                         <Typography variant="h6">{`Day ${index + 1}`}</Typography>
                         <ActivitySelectedCard
+                            activityImg={activity.imageURL}
                             activityData={activity}
                             clickHandle={handleDeleteClick}
                         />

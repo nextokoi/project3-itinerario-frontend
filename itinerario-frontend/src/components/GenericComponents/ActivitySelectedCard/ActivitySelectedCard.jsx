@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardMedia } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function ActivitySelectedCard({ activityData, clickHandle }) {
+export default function ActivitySelectedCard({ activityData, clickHandle, activityImg }) {
 
   const handleClick = () => {
     clickHandle(activityData)
@@ -15,7 +15,7 @@ export default function ActivitySelectedCard({ activityData, clickHandle }) {
 
   return (
     <Card sx={{ height: 150, width: 350, display: 'flex', alignItems: 'center', mb: 2 }} >
-      <CardMedia sx={{ objectFit: 'cover', width: '100%', height: '100%' }} image={'./../../../../../photos/onsen.jpg'} />
+      <CardMedia sx={{ objectFit: 'cover', width: '100%', height: '100%' }} image={activityImg} />
       <CardContent sx={{ width: '100%' }}>
         <Typography variant="body2">{activityData.name}</Typography>
       </CardContent>
@@ -28,5 +28,7 @@ export default function ActivitySelectedCard({ activityData, clickHandle }) {
 
 ActivitySelectedCard.propTypes = {
   activityData: PropTypes.object,
+  activityImg: PropTypes.string,
   clickHandle: PropTypes.func
+
 }

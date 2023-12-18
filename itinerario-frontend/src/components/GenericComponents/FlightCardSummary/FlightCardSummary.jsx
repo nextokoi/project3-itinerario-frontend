@@ -73,6 +73,7 @@ FlightCardSummary.propTypes = {
     originCode: PropTypes.string,
     destination: PropTypes.string,
     destinationCode: PropTypes.string,
-    price: PropTypes.string,
-    duration: PropTypes.string
+    price: PropTypes.number,
+    duration: PropTypes.number
 }
+

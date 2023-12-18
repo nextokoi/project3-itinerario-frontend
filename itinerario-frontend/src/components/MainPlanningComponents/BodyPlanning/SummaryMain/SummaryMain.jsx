@@ -5,11 +5,9 @@ import { Box, Divider, Typography } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { mainContext } from '../../../../contexts/mainContext'
 
-
-
 function SummaryMain() {
 
-    const { mainData, setMainData } = useContext(mainContext)
+    const { mainData } = useContext(mainContext)
 
     // Flight Card Summary props 
 
