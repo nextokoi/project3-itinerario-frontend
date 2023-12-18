@@ -7,12 +7,11 @@ import Typography from '@mui/material/Typography';
 import { CardMedia } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function ActivitySelectedCard({ activityData,clickHandle }) {
+export default function ActivitySelectedCard({ activityData, clickHandle }) {
 
-const handleClick = () => {
-  clickHandle(activityData)
-}
-
+  const handleClick = () => {
+    clickHandle(activityData)
+  }
 
   return (
     <Card sx={{ height: 150, width: 350, display: 'flex', alignItems: 'center', mb: 2 }} >
