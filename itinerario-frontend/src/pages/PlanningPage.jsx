@@ -10,6 +10,8 @@ import Box from '@mui/material/Box'
 import ButtonNavigation from '../components/GenericComponents/ButtonNavigation/ButtonNavigation'
 import { useState, useEffect, useContext } from 'react'
 import { mainContext } from '../contexts/mainContext'
+import { createTravelPlanning } from '../services/travelPlanningService'
+import { createFlight } from '../services/flightInternalService'
 
 export default function PlanningPage() {
     const { mainData } = useContext(mainContext)
@@ -29,6 +31,35 @@ export default function PlanningPage() {
         } else {
             if (stepperStatus <= 3) setStepperStatus(stepperStatus + 1)
         }
+    }
+
+    const handleTravelPlanningCreation = () =>{
+        // const flightGoingData = {
+        //     flight_num : mainData.flightGoing,
+        //     airline, 
+        //     origin, 
+        //     depart_date, 
+        //     distance, 
+        //     duration, 
+        //     trip_class, 
+        //     price,
+        //     travelLocationId
+        // }
+        // const flightBackData = {
+
+        // }
+
+        const travelPlanningData = {
+            name : "Travel Planning",
+            description : "",
+            beginning_date : mainData.dateGoing, 
+            ending_date : mainData.dateBack, 
+            flight_going_id : 1, 
+            flight_return_id : 2,
+            travelLocationId : mainData.destination.id
+        }
+        console.log(travelPlanningData)
+        createTravelPlanning(travelPlanningData)
     }
 
     const componentSwitcher = (stepNum) => {
@@ -62,7 +93,7 @@ export default function PlanningPage() {
                 </>}
                 {stepperStatus === 4 && <>
                     <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} />
-                    <ButtonNavigation handleNavigation={handleNavigation} text={'Save Changes'} bgColor={"#4BB449"} />
+                    <ButtonNavigation handleNavigation={handleTravelPlanningCreation} text={'Save Changes'} bgColor={"#4BB449"} />
                 </>}
             </Box>
         )
