@@ -5,17 +5,10 @@ import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import PropTypes from 'prop-types'
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import './FlightCard.css'
 
 export default function FlightCard({ data, date, onSelect, isSelected, airlines, origin, destination }) {
-
-    const [selected, setSelected] = useState(false)
-
-    const handleClick = () => {
-        setSelected(!selected)
-        onSelect(data, !selected)
-    }
 
     const getRandomAirline = (airlines) => {
         const numAirlines = airlines.length;
@@ -56,7 +49,20 @@ export default function FlightCard({ data, date, onSelect, isSelected, airlines,
     const airlineRandom = useRef(getRandomAirline(airlines))
     const randomNumberFlight = useRef(getRandomNumberFlight(12501, 98979))
     const randomTime = useRef(getRandom24HourTime())
-    
+
+    const newData = {
+        ...data,
+        airline: airlineRandom.current.name,
+        airlineCode: airlineRandom.current.code,
+        numberFlight: randomNumberFlight.current,
+        departTime: randomTime.current,
+        durationFormatted: duration
+    }
+
+    const handleClick = () => {
+        onSelect(newData)
+    }
+ 
     return (
         <Card sx={{ py: 3, px: 1, minWidth: 300, maxWidth: 500, cursor: 'pointer', "&:hover": { border: isSelected ? '2px solid #1976d2' : '2px solid green' } }} className={isSelected ? 'selected' : 'unselected'} onClick={handleClick}>
             <CardContent>
