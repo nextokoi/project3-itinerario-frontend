@@ -20,9 +20,9 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Itinerooh
-      </Link>{' '}
+      <Linked component={Link} to={'/signup'} color="inherit" href="https://mui.com/">
+        Itinero
+      </Linked>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -55,6 +55,7 @@ export default function SignUpForm() {
     event.preventDefault();
     const data = new FormData(event.currentTarget)
 
+    const username = data.get('username')
     const email = data.get('email')
     const password = data.get('password')
 
@@ -65,6 +66,7 @@ export default function SignUpForm() {
 
     try {
       const response = await signup({
+        username,
         email,
         password
       });
@@ -100,7 +102,17 @@ export default function SignUpForm() {
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2}>              
+              <Grid item xs={12}>
+                <TextField
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                  />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -146,9 +158,9 @@ export default function SignUpForm() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Linked component={Link} to={'/login'} variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </Linked>
               </Grid>
             </Grid>
           </Box>

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material"
 import { Link } from 'react-router-dom'
 import SearchBar from "../components/GenericComponents/SearchBar/SearchBar"
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import { mainContext } from "../contexts/mainContext"
 import PublicIcon from '@mui/icons-material/Public';
 import HikingIcon from '@mui/icons-material/Hiking';
@@ -9,10 +9,7 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 
 function LandingPage() {
 
-  // const [origin, setOrigin] = useState('')
-  // const [destination, setDestination] = useState('')
-
-  const { mainData, setMainData } = useContext(mainContext)
+  const { setMainData } = useContext(mainContext)
 
   function handleOriginChange(optionSelected) {
 
@@ -29,13 +26,6 @@ function LandingPage() {
       destination: { ...optionSelected }
     }))
   }
-
-
-  // useEffect(() => {
-
-  //   console.log("mainData: ", mainData)
-
-  // }, [mainData])
 
   const heroImage = './../../public/photos/hero-image.jpg'
 

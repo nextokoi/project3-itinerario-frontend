@@ -13,13 +13,16 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+/* const pages = ['Products', 'Pricing', 'Blog']; */
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const settings = [{ name: 'Profile', path: 'profile' }, { name: 'Account', path: '' }, { name: 'Dashboard', path: '' }, { name: 'Logout', path: '' }];
+const settings = [{ name: 'Profile', path: 'profile' }, { name: 'Logout' }];
 
 function Header() {
+  const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -34,7 +37,11 @@ function Header() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    if(e.target.outerText === 'Logout'){
+      localStorage.removeItem('token')
+      navigate('/')
+    }
     setAnchorElUser(null);
   };
 
@@ -61,8 +68,8 @@ function Header() {
             Itinero
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+ {/*            <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -95,7 +102,7 @@ function Header() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -116,7 +123,7 @@ function Header() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+{/*           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -126,9 +133,12 @@ function Header() {
                 {page}
               </Button>
             ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
+          </Box> */}
+          {!localStorage.getItem("token") && (
+            <Button component={Link} to={'/login'} sx={{ color: '#fff', mr: 5}}>Sign in <AccountCircleIcon sx={{ml: 1}}/></Button>
+          )} 
+    
+          {localStorage.getItem("token") && (<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -151,16 +161,18 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
 
-              {settings.map((setting) => (
-                <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                  <Link to={setting.path} style={{ textDecoration: 'none' }}>
-                    <Typography textAlign="center">{setting.name}</Typography>
+              {settings.map((setting) => {
+                 return ( 
+                 <Link to={setting.path} style={{ textDecoration: 'none' }} key={setting.name} >
+                    <MenuItem onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">{setting.name}</Typography>
+                    </MenuItem>
                   </Link>
-                </MenuItem>
-              ))}
+                )
+              })}
 
             </Menu>
-          </Box>
+          </Box>)}
         </Toolbar>
       </Container>
     </AppBar>

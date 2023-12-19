@@ -21,8 +21,14 @@ const router = createBrowserRouter([
       },
       {
         path: "planning",
-        element: <PlanningPage />
-
+        element: <PlanningPage />,
+        loader: () => {
+          if (!localStorage.getItem("token")) {
+            return redirect("/login")
+          } else {
+            return null;
+          }
+        },
       },
       {
         path: "about",
@@ -37,7 +43,14 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />
+        element: <Profile />,
+        loader: () => {
+          if (!localStorage.getItem("token")) {
+            return redirect("/login")
+          } else {
+            return null;
+          }
+        }
       }
     ]
   }

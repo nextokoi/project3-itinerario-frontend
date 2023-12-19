@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
-import { getAllUsers } from './services/userService'
-import { signup, login } from './services/authService'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
 
@@ -24,7 +22,7 @@ function App() {
 
   const data = { mainData, setMainData }
 
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchData = async () => {
 
       await login({
@@ -35,7 +33,7 @@ function App() {
       // await getAllUsers()
     }
     fetchData()
-  }, [])
+  }, []) */
 
 
 
