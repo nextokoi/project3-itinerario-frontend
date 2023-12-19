@@ -1,25 +1,47 @@
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
-import {getAllUsers} from './services/userService'
-import { signup,login } from './services/authService'
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
+
+import { mainContext } from './contexts/mainContext'
 
 function App() {
 
-  useEffect(()=>{
-    const fetchData = async () =>{
+  const [mainData, setMainData] = useState({
+    travelPlanningName: '',
+    dateGoing: '',
+    dateBack: '',
+    origin: {},
+    destination: {},
+    flightGoing: {},
+    flightBack: {},
+    activities: [],
+    lodging: [],
+    days : 0
+  })
+
+  const data = { mainData, setMainData }
+
+/*   useEffect(() => {
+    const fetchData = async () => {
+
       await login({
-        "email" : "dani@gmail.com",
-        "password" : "12345678",
+        "email": "dani@gmail.com",
+        "password": "12345678",
       })
-      await getAllUsers()
-    } 
+
+      // await getAllUsers()
+    }
     fetchData()
-  },[])
+  }, []) */
+
 
 
   return (
     <>
-      <h1>Queso</h1>
+      <mainContext.Provider value={data}>
+        <RouterProvider router={router} />
+      </mainContext.Provider>
     </>
   )
 }
