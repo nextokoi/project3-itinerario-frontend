@@ -1,98 +1,94 @@
-import React from 'react'
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import { getOwnProfile } from '../services/userService'
-import { getOwnTravelPlannings } from '../services/travelPlanningService'
 import { useState, useEffect } from 'react'
 import { Typography } from '@mui/material'
-import { getOneFlight } from '../services/flightInternalService'
-
+import imageProfile from '../../public/photos/profile.svg'
+import BasicBreadcrumbs from '../components/GenericComponents/BreadCrumbs/BreadCrumbs'
+import { getOwnTravelPlannings } from '../services/travelPlanningService'
+import ProfileCard from '../components/GenericComponents/ProfileCard/ProfileCard'
 
 export default function Profile() {
-
     const [profileData, setProfileData] = useState({})
-    const [travelPlaningData, setTravelPlaningData] = useState({})
-    const [flightData, setFlightData] = useState({})
+    const [travelPlaningData, setTravelPlaningData] = useState([])
 
+    useEffect(() => {
 
-    // const { flightId } = useParams();
+        const fetchData = async () => {
+            try {
+                const data = await getOwnProfile()
+                console.log(data)
+                setProfileData(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
 
-    // const [flightGoingId, setFlightGoingId] = useState(0)
-    // const [flightBackId, setFlightBackId] = useState(0)
+        fetchData()
+
+    }, [])
 
     // nos traemos la información del usuario
     // y nos traemos la informacion de los travel plannings del usuario
 
+    
     useEffect(() => {
 
         const fetchData = async () => {
-
-            const data = await getOwnProfile()
-            console.log(data)
-            setProfileData(data)
-
+            try {
+                const data = await getOwnProfile()
+                console.log(data)
+                setProfileData(data)
+            } catch (error) {
+                console.log(error)
+            }
         }
         const fetchTravelPlanningData = async () => {
+            try {
+                const dataTP = await getOwnTravelPlannings()
+                setTravelPlaningData(dataTP)
+            } catch (error) {
+                console.log(error)
+            }
 
-            const dataTP = await getOwnTravelPlannings()
-            setTravelPlaningData(dataTP)
         }
-
+        fetchData()
         fetchTravelPlanningData()
-        fetchData()
 
     }, [])
 
     useEffect(() => {
-        const fetchData = async () => {
-
-            const data = await getOneFlight(1)
-            console.log(data)
-            setFlightData(data)
-
-        }
-        fetchData()
-
-    }, [])
-
-    useEffect(() => {
-
-        console.log("hello", travelPlaningData)
-
+        console.log(travelPlaningData)
     }, [travelPlaningData])
 
-
-    useEffect(() => {
-
-        console.log("flightData", flightData)
-
-    }, [flightData])
-
-    const renderPlannings = () => {
-
-
-
-
+    const renderTravelPlanningList = () => {
+        return travelPlaningData.map((plan) => {
+            return (
+                <ProfileCard
+                    key={plan.id}
+                    data={plan}
+                />
+            )
+        })
     }
 
-
     return (
-
-
-        < Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-
-            <Typography variant='h4'>Welcome Back {profileData.username}</Typography>
-            <Typography variant='h6'>Role: {profileData.role}</Typography>
-            <Typography>This is your itinerary list: ______  </Typography>
-
-            <Box>
-
-                {renderPlannings()}
-
+        <Container sx={{ my: 5 }}>
+            <Box sx={{ mb: 3 }}>
+                <BasicBreadcrumbs />
             </Box>
-
-
-        </Box >
-
+            <Box sx={{ display: 'flex', justifyContent: 'end', gap: '20px'}}>
+                <Typography variant='h5'>Welcome back, {profileData.username}!</Typography>
+                <Box component="img" src={imageProfile} sx={{height: '300px'}}/>
+            </Box >
+            <Box sx={{ mt: 5}}>
+                <Typography variant='h5' sx={{ mt: 5 }}>Here you can view your saved itineraries</Typography>
+                <Box sx={{display: 'flex', justifyContent: 'center', my: 5 }}>
+                    <Box sx={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+                        {renderTravelPlanningList()}
+                    </Box>
+                </Box>
+            </Box>
+        </Container>
     )
 }
 
