@@ -10,9 +10,6 @@ function FlightMain() {
 
     const { mainData, setMainData } = useContext(mainContext)
 
-    const [selectedFlightGoing, setSelectedFlightGoing] = useState(false)
-    const [selectedFlightBack, setSelectedFlightBack] = useState(false)
-
     const [flightListOneWay, setFlightListOneWay] = useState([])
     const [flightListReturn, setFlightListReturn] = useState([])
 
@@ -27,7 +24,7 @@ function FlightMain() {
 
     const airlines = [
         {
-            code : "UX",
+            code: "UX",
             name: "Air Europa",
             imageLogo: "./public/photos/logo-UX.png"
         },
@@ -47,36 +44,17 @@ function FlightMain() {
     //Select and unselect flight cards
 
     const handleFlightSelectGoing = (flight) => {
-        if (selectedFlightGoing === flight) {
-            setSelectedFlightGoing(null)
-            setMainData((prevData) => ({
-                ...prevData,
-                flightGoing: null
-            }))
-        } else {
-            setSelectedFlightGoing(flight)
-            setMainData((prevData) => ({
-                ...prevData,
-                flightGoing: flight
-            }))
-        }
+        setMainData((prevData) => ({
+            ...prevData,
+            flightGoing: flight
+        }))
     }
 
     const handleFlightSelectBack = (flight) => {
-        if (selectedFlightBack === flight) {
-            setSelectedFlightBack(null)
-            setMainData((prevData) => ({
-                ...prevData,
-                flightBack: null
-            }))
-        } else {
-            setSelectedFlightBack(flight)
-            setMainData((prevData) => ({
-                ...prevData,
-                flightBack: flight
-            }))
-        }
-
+        setMainData((prevData) => ({
+            ...prevData,
+            flightBack: flight
+        }))
     }
 
     // filtering and mapping the list of flights cards
@@ -90,7 +68,6 @@ function FlightMain() {
                         data={flight}
                         date={flight.depart_date}
                         onSelect={(selectedFlightGoing) => handleFlightSelectGoing(selectedFlightGoing)}
-                        isSelected={selectedFlightGoing === flight}
                         airlines={airlines}
                         origin={origin.name}
                         destination={destination.name}
@@ -108,7 +85,6 @@ function FlightMain() {
                         data={flight}
                         date={flight.depart_date}
                         onSelect={(selectedFlightBack) => handleFlightSelectBack(selectedFlightBack)}
-                        isSelected={selectedFlightBack === flight}
                         airlines={airlines}
                         origin={destination.name}
                         destination={origin.name}

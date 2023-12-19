@@ -5,10 +5,12 @@ import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import PropTypes from 'prop-types'
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './FlightCard.css'
 
-export default function FlightCard({ data, date, onSelect, isSelected, airlines, origin, destination }) {
+export default function FlightCard({ data, date, onSelect, airlines, origin, destination }) {
+
+    const [isSelected, setIsSelected] = useState(false);
 
     const getRandomAirline = (airlines) => {
         const numAirlines = airlines.length;
@@ -60,11 +62,12 @@ export default function FlightCard({ data, date, onSelect, isSelected, airlines,
     }
 
     const handleClick = () => {
+        setIsSelected(!isSelected);
         onSelect(newData)
     }
  
     return (
-        <Card sx={{ py: 3, px: 1, minWidth: 300, maxWidth: 500, cursor: 'pointer', "&:hover": { border: isSelected ? '2px solid #1976d2' : '2px solid green' } }} className={isSelected ? 'selected' : 'unselected'} onClick={handleClick}>
+        <Card sx={{ py: 3, px: 1, minWidth: 300, maxWidth: 500, cursor: 'pointer', border: isSelected ? '2px solid #1976d2' : '2px solid #ccc',}} onClick={handleClick}>
             <CardContent>
                 <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px'}}>
@@ -125,7 +128,6 @@ FlightCard.propTypes = {
     classIcon: PropTypes.string,
     date: PropTypes.string,
     onSelect: PropTypes.func,
-    isSelected: PropTypes.bool,
     airlines: PropTypes.array,
     origin: PropTypes.string,
     destination: PropTypes.string
