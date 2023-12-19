@@ -29,17 +29,17 @@ function FlightMain() {
         {
             code: "UX",
             name: "Air Europa",
-            imageLogo: "./public/photos/logo-UX.png"
+            imageLogo: "../../../../assets/photos/logo-UX.png"
         },
         {
             code: "RYR",
             name: "Ryanair",
-            imageLogo: "./public/photos/logo-FR.png"
+            imageLogo: "../../../../assets/photos/logo-FR.png"
         },
         {
             code: "IBE",
             name: "Iberia",
-            imageLogo: "./public/photos/logo-IB.png"
+            imageLogo: "../../../../assets/photos/logo-IB.png"
         }
     ]
 
