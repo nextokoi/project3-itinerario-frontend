@@ -6,6 +6,7 @@ import { mainContext } from "../contexts/mainContext"
 import PublicIcon from '@mui/icons-material/Public';
 import HikingIcon from '@mui/icons-material/Hiking';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
+import imageHero from '../assets/photos/hero-image.jpg'
 
 function LandingPage() {
 
@@ -26,8 +27,6 @@ function LandingPage() {
       destination: { ...optionSelected }
     }))
   }
-
-  const heroImage = './../assets/photos/hero-image.jpg'
 
   return (
 
@@ -58,7 +57,7 @@ function LandingPage() {
             <FactCheckIcon /> <Typography>Save a summary of your itinerary with all your chosen activities to your profile for easy access and sharing</Typography>
           </Box>
         </Box>
-        <Box sx={{ backgroundImage: `url(${heroImage})`, height: '767px', width: '80%', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <Box sx={{ backgroundImage: `url(${imageHero})`, height: '767px', width: '80%', backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%', justifyContent: 'space-around', paddingLeft: '20px' }}>
             <Box width={300}>
               <Typography variant="h6">What will be your next destination?</Typography>
