@@ -54,6 +54,7 @@ export default function FlightCard({ data, date, onSelect, isSelected, airlines,
         ...data,
         airline: airlineRandom.current.name,
         airlineCode: airlineRandom.current.code,
+        airlineImage: airlineRandom.current.imageLogo,
         numberFlight: randomNumberFlight.current,
         departTime: randomTime.current,
         durationFormatted: duration

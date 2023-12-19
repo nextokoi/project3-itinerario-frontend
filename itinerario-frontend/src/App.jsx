@@ -10,6 +10,7 @@ import { mainContext } from './contexts/mainContext'
 function App() {
 
   const [mainData, setMainData] = useState({
+    travelPlanningName: '',
     dateGoing: '',
     dateBack: '',
     origin: {},
