@@ -10,6 +10,7 @@ function SummaryMain() {
     const { mainData } = useContext(mainContext)
 
     // Flight Card Summary props 
+    const travelPlanningName= mainData.travelPlanningName
 
     const origin = mainData.origin.name
     const originCode = mainData.origin.cityCode
@@ -85,6 +86,10 @@ function SummaryMain() {
     return (
         <Box sx={{ px: 10 }}>
             <Box sx={{ mb: 5 }}>
+                <Box sx={{ mb: 3 }}>
+                    <Typography variant='h4' >Name</Typography>
+                    <Typography sx={{my:2}} variant='h5'>{travelPlanningName}</Typography>
+                </Box>
                 <Box sx={{ mb: 3 }}>
                     <Typography variant='h4' >Date</Typography>
                     <Typography variant='overline'>{mainData.dateGoing} <strong>To</strong>  {mainData.dateBack}</Typography>
