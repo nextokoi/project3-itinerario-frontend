@@ -19,7 +19,19 @@ const fetchData = async (origin, destination, month, setFlightList) => {
 
     try {
         const response = await axios.request(options);
-        setFlightList(response.data.data);
+        const result = response.data.data
+        const getRandomNumberFlight = (min, max) => {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        };
+        const resultData = result.map((flight) => {
+            const randomNumberFlight = getRandomNumberFlight(12501, 98979)
+            return {
+                ...flight,
+                id: randomNumberFlight
+            }
+        })
+        console.log(resultData)
+        setFlightList(resultData);
     } catch (error) {
         console.error(error);
     }

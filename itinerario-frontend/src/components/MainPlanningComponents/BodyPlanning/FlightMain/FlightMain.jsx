@@ -10,16 +10,19 @@ function FlightMain() {
 
     const { mainData, setMainData } = useContext(mainContext)
 
-    const [flightListOneWay, setFlightListOneWay] = useState([])
-    const [flightListReturn, setFlightListReturn] = useState([])
+    const [flightListGoing, setFlightListGoing] = useState([])
+    const [flightListBack, setFlightListBack] = useState([])
+
+    const [isSelectedGoing, setIsSelectGoing] = useState()
+    const [isSelectedBack, setIsSelectBack] = useState()
 
     const { origin, destination, dateGoing, dateBack } = mainData
 
     //Fetch flight data
 
     useEffect(() => {
-        fetchData(origin.cityCode, destination.cityCode, dateGoing, setFlightListOneWay)
-        fetchData(destination.cityCode, origin.cityCode, dateBack, setFlightListReturn)
+        fetchData(origin.cityCode, destination.cityCode, dateGoing, setFlightListGoing)
+        fetchData(destination.cityCode, origin.cityCode, dateBack, setFlightListBack)
     }, [destination.cityCode, origin.cityCode, dateGoing, dateBack])
 
     const airlines = [
@@ -44,6 +47,7 @@ function FlightMain() {
     //Select and unselect flight cards
 
     const handleFlightSelectGoing = (flight) => {
+        setIsSelectGoing(flight.id)
         setMainData((prevData) => ({
             ...prevData,
             flightGoing: flight
@@ -51,15 +55,18 @@ function FlightMain() {
     }
 
     const handleFlightSelectBack = (flight) => {
+        setIsSelectBack(flight.id)
         setMainData((prevData) => ({
             ...prevData,
             flightBack: flight
         }))
     }
 
+
+
     // filtering and mapping the list of flights cards
 
-    const renderFlightListOneWay = (flightList) => {
+    const renderFlightListGoing = (flightList) => {
         return flightList.filter((flight) => flight.depart_date === mainData.dateGoing)
             .map((flight, index) => {
                 return (
@@ -68,6 +75,7 @@ function FlightMain() {
                         data={flight}
                         date={flight.depart_date}
                         onSelect={(selectedFlightGoing) => handleFlightSelectGoing(selectedFlightGoing)}
+                        isSelected={isSelectedGoing === flight.id}
                         airlines={airlines}
                         origin={origin.name}
                         destination={destination.name}
@@ -76,7 +84,7 @@ function FlightMain() {
             })
     }
 
-    const renderFlightListReturn = (flightList) => {
+    const renderFlightListBack = (flightList) => {
         return flightList.filter((flight) => flight.depart_date === mainData.dateBack)
             .map((flight, index) => {
                 return (
@@ -85,6 +93,7 @@ function FlightMain() {
                         data={flight}
                         date={flight.depart_date}
                         onSelect={(selectedFlightBack) => handleFlightSelectBack(selectedFlightBack)}
+                        isSelected={isSelectedBack === flight.id}
                         airlines={airlines}
                         origin={destination.name}
                         destination={origin.name}
@@ -106,14 +115,14 @@ function FlightMain() {
                 <Box sx={{ mb: 10 }}>
                     <Typography variant='h4' sx={{ mb: 2 }}>One-Way</Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                        {renderFlightListOneWay(flightListOneWay)}
+                        {renderFlightListGoing(flightListGoing)}
                     </Box>
                 </Box>
 
                 <Box>
                     <Typography variant='h4' sx={{ mb: 2 }}>Return</Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                        {renderFlightListReturn(flightListReturn)}
+                        {renderFlightListBack(flightListBack)}
                     </Box>
                 </Box>
             </Box>

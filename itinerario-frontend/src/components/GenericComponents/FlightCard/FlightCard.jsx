@@ -5,12 +5,10 @@ import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import PropTypes from 'prop-types'
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import './FlightCard.css'
 
-export default function FlightCard({ data, date, onSelect, airlines, origin, destination }) {
-
-    const [isSelected, setIsSelected] = useState(false);
+export default function FlightCard({ data, date, onSelect, isSelected, airlines, origin, destination }) {
 
     const getRandomAirline = (airlines) => {
         const numAirlines = airlines.length;
@@ -62,7 +60,6 @@ export default function FlightCard({ data, date, onSelect, airlines, origin, des
     }
 
     const handleClick = () => {
-        setIsSelected(!isSelected);
         onSelect(newData)
     }
  
@@ -128,6 +125,7 @@ FlightCard.propTypes = {
     classIcon: PropTypes.string,
     date: PropTypes.string,
     onSelect: PropTypes.func,
+    isSelected: PropTypes.bool,
     airlines: PropTypes.array,
     origin: PropTypes.string,
     destination: PropTypes.string
