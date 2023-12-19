@@ -15,7 +15,7 @@ const getAllTravelPlannings = async () => {
 
 const getOwnTravelPlannings = async () => {
     try {
-        const { data } = await api.get('/travelPlanning/profile	', {
+        const { data } = await api.get('/travelPlanning/profile', {
             headers: {
                 Authorization: localStorage.getItem("token")
             }
@@ -28,7 +28,7 @@ const getOwnTravelPlannings = async () => {
 
 const createTravelPlanning = async (travelPlanningData) => {
     try {
-        const { data } = await api.post('/travelPlanning',travelPlanningData ,{
+        const { data } = await api.post('/travelPlanning', travelPlanningData, {
             headers: {
                 Authorization: localStorage.getItem("token")
             }

@@ -56,8 +56,8 @@ function HeaderPlanning({ stepperStatus }) {
               color: '#fff',
             }}
           >
-            <Typography variant="h4">City</Typography>
-            <Typography variant="h5">Country</Typography>
+            <Typography variant="h4">{mainData.destination.name}</Typography>
+            <Typography variant="h5">{mainData.destination.country}</Typography>
           </Box>
         </Box>
       </Box>

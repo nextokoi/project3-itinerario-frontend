@@ -16,10 +16,10 @@ import { createFlight } from '../services/flightInternalService'
 export default function PlanningPage() {
     const { mainData } = useContext(mainContext)
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(mainData)
-    },[mainData])
-    
+    }, [mainData])
+
 
     const [stepperStatus, setStepperStatus] = useState(0)
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function PlanningPage() {
         }
     }
 
-    const handleTravelPlanningCreation = () =>{
+    const handleTravelPlanningCreation = () => {
         // const flightGoingData = {
         //     flight_num : mainData.flightGoing,
         //     airline, 
@@ -49,17 +49,24 @@ export default function PlanningPage() {
 
         // }
 
+        // console.log(mainData.flightGoing.numberFlight)
+
         const travelPlanningData = {
-            name : "Travel Planning",
-            description : "",
-            beginning_date : mainData.dateGoing, 
-            ending_date : mainData.dateBack, 
-            flight_going_id : 1, 
-            flight_return_id : 2,
-            travelLocationId : mainData.destination.id
+            name: mainData.travelPlanningName,
+            description: "",
+            beginning_date: mainData.dateGoing,
+            ending_date: mainData.dateBack,
+            flight_going_id: 1,
+            flight_return_id: 2,
+
+            travelLocationId: mainData.destination.id
         }
         console.log(travelPlanningData)
+
+
+
         createTravelPlanning(travelPlanningData)
+
     }
 
     const componentSwitcher = (stepNum) => {
@@ -103,7 +110,7 @@ export default function PlanningPage() {
     return (
 
         <div>
-            
+
             <HeaderPlanning stepperStatus={stepperStatus} />
             {componentSwitcher(stepperStatus)}
             {renderButtons()}

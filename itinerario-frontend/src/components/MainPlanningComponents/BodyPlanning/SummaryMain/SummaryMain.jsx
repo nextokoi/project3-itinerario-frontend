@@ -2,7 +2,7 @@ import FlightCardSummary from '../../../GenericComponents/FlightCardSummary/Flig
 import ActivityCardSummary from '../../../GenericComponents/ActivityCardSummary/ActivityCardSummary'
 import './SummaryMain.css'
 import { Box, Divider, Typography } from '@mui/material'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { mainContext } from '../../../../contexts/mainContext'
 
 function SummaryMain() {
@@ -14,6 +14,20 @@ function SummaryMain() {
     const origin = mainData.origin.name
     const originCode = mainData.origin.cityCode
 
+    const airlineNameGoing = mainData.flightGoing.airline
+    const airlineNameGoingCode = mainData.flightGoing.airlineCode
+    const flightNumGoing = mainData.flightGoing.numberFlight
+    const airlineLogoGoing = mainData.flightGoing.airlineImage
+
+    const departureTimeGoing = mainData.flightGoing.departTime
+
+    const airlineNameBack = mainData.flightBack.airline
+    const airlineNameBackCode = mainData.flightBack.airlineCode
+    const flightNumBack = mainData.flightBack.numberFlight
+    const airlineLogoBack = mainData.flightBack.airlineImage
+
+    const departureTimeBack = mainData.flightBack.departTime
+
     const destination = mainData.destination.name
     const destinationCode = mainData.destination.cityCode
 
@@ -23,8 +37,8 @@ function SummaryMain() {
     const priceGoing = mainData.flightGoing.value
     const priceBack = mainData.flightBack.value
 
-    const durationGoing = mainData.flightGoing.duration
-    const durationBack = mainData.flightBack.duration
+    const durationGoing = mainData.flightGoing.durationFormatted
+    const durationBack = mainData.flightBack.durationFormatted
 
     // End - Flight Card Summary props
 
@@ -34,14 +48,13 @@ function SummaryMain() {
 
         return mainData.activities.map((activity, index) => {
             return (
-                <>
+                <Box key={index}>
                     <Typography>{`Day ${index + 1}`}</Typography>
                     <ActivityCardSummary
-                        key={index}
                         activityImg={activity.imageURL}
                         activityTitle={activity.name}
                     />
-                </>
+                </Box>
             )
         })
 
@@ -50,25 +63,24 @@ function SummaryMain() {
 
         return mainData.lodging.map((activity, index) => {
             return (
-                <>
+                <Box key={index}>
                     <Typography>{`Day ${index + 1}`}</Typography>
                     <ActivityCardSummary
-                        key={index}
                         activityImg={activity.imageURL}
                         activityTitle={activity.name}
                     />
-                </>
+                </Box>
             )
         })
 
     }
     // End - Activity Card Summary props
 
-    const totalPriceCalculation = () => {
+    // const totalPriceCalculation = () => {
 
-        const totalPrice = mainData.flightGoing.value + mainData.flightBack.value
-        return totalPrice
-    }
+    //     const totalPrice = mainData.flightGoing.value + mainData.flightBack.value
+    //     return totalPrice
+    // }
 
     return (
         <Box sx={{ px: 10 }}>
@@ -85,8 +97,17 @@ function SummaryMain() {
 
                             origin={origin}
                             originCode={originCode}
+
                             destination={destination}
                             destinationCode={destinationCode}
+
+                            airlineName={airlineNameGoing}
+                            airlineCode={airlineNameGoingCode}
+                            airlineLogo={airlineLogoGoing}
+
+
+                            flightNum={flightNumGoing}
+                            departTime={departureTimeGoing}
 
                             date={dateGoing}
                             price={priceGoing}
@@ -98,8 +119,16 @@ function SummaryMain() {
 
                             origin={destination}
                             originCode={destinationCode}
+
                             destination={origin}
                             destinationCode={originCode}
+
+                            airlineName={airlineNameBack}
+                            airlineCode={airlineNameBackCode}
+                            airlineLogo={airlineLogoBack}
+
+                            flightNum={flightNumBack}
+                            departTime={departureTimeBack}
 
                             date={dateBack}
                             price={priceBack}

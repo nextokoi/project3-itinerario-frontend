@@ -13,9 +13,22 @@ const getAllFlights = async () => {
     }
 }
 
+const getOneFlight = async (flightId) => {
+    try {
+        const { data } = await api.get(`/flight/${flightId}`, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const createFlight = async (flightData) => {
     try {
-        const { data } = await api.post('/flight',flightData ,{
+        const { data } = await api.post('/flight', flightData, {
             headers: {
                 Authorization: localStorage.getItem("token")
             }
@@ -30,5 +43,6 @@ const createFlight = async (flightData) => {
 
 export {
     getAllFlights,
-    createFlight
+    createFlight,
+    getOneFlight
 }
