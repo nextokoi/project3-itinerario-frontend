@@ -27,7 +27,7 @@ function LandingPage() {
     }))
   }
 
-  const heroImage = './../../public/photos/hero-image.jpg'
+  const heroImage = './../assets/photos/hero-image.jpg'
 
   return (
 
