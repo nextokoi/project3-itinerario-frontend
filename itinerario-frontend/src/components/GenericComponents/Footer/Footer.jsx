@@ -3,9 +3,13 @@ import { Link } from "react-router-dom"
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { useTheme } from "@emotion/react";
+import { customTheme } from "../../../themes/custom";
 
 
 function Footer() {
+
+  const theme = useTheme(customTheme)
 
   const footerElements = [{ name: 'PRIVACY', path: 'privacy' }, { name: 'CONTACT', path: 'contact' }, { name: 'ABOUT', path: 'about' }]
 
@@ -20,7 +24,7 @@ function Footer() {
 
   return (
 
-    <Box sx={{ backgroundColor: '#1976d2', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingX: '100px' }}>
+    <Box sx={{ backgroundColor: theme.palette.primary.main, color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingX: '100px' }}>
 
       <Box sx={{ display: 'flex', color: '#fff', justifyContent: 'space-between', alignItems: 'center', gap: '70px' }}>
 

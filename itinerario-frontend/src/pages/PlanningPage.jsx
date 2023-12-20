@@ -9,6 +9,7 @@ import ButtonNavigation from '../components/GenericComponents/ButtonNavigation/B
 import { useState, useEffect, useContext } from 'react'
 import { mainContext } from '../contexts/mainContext'
 import { createTravelPlanning } from '../services/travelPlanningService'
+import { Container } from '@mui/material'
 
 export default function PlanningPage() {
     const { mainData } = useContext(mainContext)
@@ -69,8 +70,11 @@ export default function PlanningPage() {
 
     function renderButtons() {
         return (
-            <Box sx={{ display: 'flex', justifyContent: 'space-around', my: "40px" }}>
-                {stepperStatus === 0 && <ButtonNavigation handleNavigation={handleNavigation} text={'Next'} />}
+            <Box sx={{ display: 'flex', justifyContent: 'space-around', my: "40px"}}>
+                {stepperStatus === 0 && <>
+                    <Box sx={{padding: '15px', width: '100px'}}></Box>
+                    <ButtonNavigation handleNavigation={handleNavigation} text={'Next'} />
+                    </>}
                 {stepperStatus > 0 && stepperStatus < 3 && <>
                     <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} />
                     <ButtonNavigation handleNavigation={handleNavigation} text={'Next'} />
@@ -90,13 +94,13 @@ export default function PlanningPage() {
 
     return (
 
-        <div>
+        <Container>
 
             <HeaderPlanning stepperStatus={stepperStatus} />
             {componentSwitcher(stepperStatus)}
             {renderButtons()}
 
-        </div>
+        </Container>
 
     )
 }

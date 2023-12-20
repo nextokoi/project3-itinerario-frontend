@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { customTheme } from './themes/custom'
 
 import { mainContext } from './contexts/mainContext'
 
@@ -39,9 +41,12 @@ function App() {
 
   return (
     <>
-      <mainContext.Provider value={data}>
-        <RouterProvider router={router} />
-      </mainContext.Provider>
+      <ThemeProvider theme={customTheme}>
+        <CssBaseline />
+        <mainContext.Provider value={data}>
+          <RouterProvider router={router} />
+        </mainContext.Provider>
+      </ThemeProvider>
     </>
   )
 }

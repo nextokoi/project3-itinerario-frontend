@@ -5,6 +5,9 @@ import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage'
 import { useContext, useEffect, useState } from 'react'
 import fetchData from '../../../../services/flightExternalService'
 import { mainContext } from '../../../../contexts/mainContext'
+import logoUX from '../../../../assets/photos/logo-UX.png'
+import logoFR from '../../../../assets/photos/logo-FR.png'
+import logoIB from '../../../../assets/photos/logo-IB.png'
 
 function FlightMain() {
 
@@ -29,17 +32,17 @@ function FlightMain() {
         {
             code: "UX",
             name: "Air Europa",
-            imageLogo: "../../../../assets/photos/logo-UX.png"
+            imageLogo: logoUX
         },
         {
             code: "RYR",
             name: "Ryanair",
-            imageLogo: "../../../../assets/photos/logo-FR.png"
+            imageLogo: logoFR
         },
         {
             code: "IBE",
             name: "Iberia",
-            imageLogo: "../../../../assets/photos/logo-IB.png"
+            imageLogo: logoIB
         }
     ]
 

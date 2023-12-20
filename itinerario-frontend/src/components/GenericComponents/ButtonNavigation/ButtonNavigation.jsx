@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import Button from '@mui/material/Button'
 
 //Botón para la navegación entre secciones del stepper -> Back - Next
-function ButtonNavigation({text, bgColor, textColor,handleNavigation}) {
+function ButtonNavigation({ text, bgColor, textColor, handleNavigation }) {
   const handleClick = () =>{
     handleNavigation(text)
   }
 
 
   return (
-    <Button variant='contained' onClick={handleClick} sx={{backgroundColor: `${bgColor}`, color: `${textColor}`, padding: '15px'}}>
+    <Button variant='contained' onClick={handleClick} sx={{backgroundColor: `${bgColor}`, color: `${textColor}`, padding: '15px', width: '100px'}}>
         {text}
     </Button>
   )
@@ -18,7 +18,8 @@ function ButtonNavigation({text, bgColor, textColor,handleNavigation}) {
 ButtonNavigation.propTypes = {
     text: PropTypes.string,
     bgColor: PropTypes.string,
-    textColor: PropTypes.string
+    textColor: PropTypes.string,
+    handleNavigation: PropTypes.func,
 }
 
 

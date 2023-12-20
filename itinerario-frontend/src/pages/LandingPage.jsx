@@ -7,9 +7,12 @@ import PublicIcon from '@mui/icons-material/Public';
 import HikingIcon from '@mui/icons-material/Hiking';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import imageHero from '../assets/photos/hero-image.jpg'
+import { useTheme } from "@mui/material"
+import { customTheme } from "../themes/custom"
 
 function LandingPage() {
 
+  const theme = useTheme(customTheme)
   const { setMainData } = useContext(mainContext)
 
   function handleOriginChange(optionSelected) {
@@ -31,7 +34,7 @@ function LandingPage() {
   return (
 
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', backgroundColor: '#1976d2', paddingY: '50px' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', backgroundColor: theme.palette.primary.main, paddingY: '50px' }}>
         <SearchBar
           placeholder={'Origin'}
           inputChange={handleOriginChange}
@@ -41,7 +44,7 @@ function LandingPage() {
           inputChange={handleDestinationChange}
         />
 
-        <Link to='planning'><Button variant="contained" sx={{ backgroundColor: 'purple', padding: '15px' }}>Search</Button></Link>
+        <Link to='planning'><Button variant="contained" sx={{ backgroundColor: theme.palette.secondary.fixedDim, color: theme.palette.secondary.fixedVariant , padding: '15px', "&:hover": { backgroundColor: theme.palette.secondary.fixedDim } }}>Search</Button></Link>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '100px', paddingY: '100px' }}>
         <Box sx={{ display: 'flex', gap: '50px', justifyContent: 'center', width: '80%' }}>
@@ -63,7 +66,7 @@ function LandingPage() {
               <Typography variant="h6">What will be your next destination?</Typography>
               <Typography variant="h4">The world is full of mysteries</Typography>
             </Box>
-            <Button variant="contained" sx={{ padding: '20px' }}>Start your journey</Button>
+            <Button variant="contained" sx={{ padding: '20px', backgroundColor: theme.palette.primary.fixed, color: theme.palette.primary.fixedVariant, "&:hover": { backgroundColor: theme.palette.primary.fixed } }}>Start your journey</Button>
           </Box>
         </Box>
       </Box>
