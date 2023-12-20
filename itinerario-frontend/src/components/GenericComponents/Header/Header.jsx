@@ -22,7 +22,7 @@ import { customTheme } from '../../../themes/custom';
 /* const pages = ['Products', 'Pricing', 'Blog']; */
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const settings = [{ name: 'Profile', path: 'profile' }, { name: 'Logout' }];
+const settings = [{ name: 'Profile', path: '/profile' }, { name: 'Logout' }];
 
 function Header() {
   const navigate = useNavigate()

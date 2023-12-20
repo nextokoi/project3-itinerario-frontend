@@ -16,11 +16,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <LandingPage />
       },
       {
-        path: "planning",
+        path: "/planning",
         element: <PlanningPage />,
         loader: () => {
           if (!localStorage.getItem("token")) {
@@ -31,18 +31,18 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "about",
+        path: "/about",
         element: <About />
       }, {
-        path: "login",
+        path: "/login",
         element: <LogInPage />
       },
       {
-        path: "signup",
+        path: "/signup",
         element: <SignUpPage />
       },
       {
-        path: "profile",
+        path: "/profile",
         element: <Profile />,
         loader: () => {
           if (!localStorage.getItem("token")) {
