@@ -9,8 +9,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate, Link } from "react-router-dom";
 import { login } from '../../../services/authService';
 import './LogInForm.css'
@@ -35,11 +33,11 @@ export default function LogInForm() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
+    const email = data.get('email')
+    const password = data.get('password')
+
     try {
-      const response = await login({
-        email: data.get('email'),
-        password: data.get('password'),
-      });
+      const response = await login({email, password});
 
       console.log(response)
 
@@ -79,7 +77,7 @@ export default function LogInForm() {
             id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
+            autoComplete="off"
             autoFocus
           />
           <TextField
@@ -90,7 +88,7 @@ export default function LogInForm() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="off"
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { signup } from '../../../services/authService';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -45,10 +44,16 @@ export default function SignUpForm() {
     });
   }; */
   const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [error, setError] = useState('')
 
   const handlePasswordRepeatChange = (e) => {
     setPasswordRepeat(e.target.value)
   }
+
+  const cleanError = () => {
+    setError('')
+  }
+
   const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
@@ -60,7 +65,7 @@ export default function SignUpForm() {
     const password = data.get('password')
 
     if (password !== passwordRepeat){
-      console.error("Las contraseñas no coinciden")
+      setError("Passwords don't match")
       return
     }
 
@@ -110,7 +115,8 @@ export default function SignUpForm() {
                     id="username"
                     label="Username"
                     name="username"
-                    autoComplete="username"
+                    autoComplete="off"
+                    onChange={cleanError}
                   />
               </Grid>
               <Grid item xs={12}>
@@ -120,7 +126,8 @@ export default function SignUpForm() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  autoComplete="off"
+                  onChange={cleanError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -131,7 +138,8 @@ export default function SignUpForm() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  autoComplete="off"
+                  onChange={cleanError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -142,10 +150,11 @@ export default function SignUpForm() {
                   label="Repeat your Password"
                   type="password"
                   id="passwordRepeat"
-                  autoComplete="new-password"
+                  autoComplete="off"
                   value={passwordRepeat}
                   onChange={handlePasswordRepeatChange}
                 />
+              {error && <p style={{color: 'red'}}> {error} </p>}
               </Grid>
             </Grid>
             <Button

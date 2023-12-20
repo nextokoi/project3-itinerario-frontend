@@ -11,10 +11,13 @@ import { mainContext } from '../contexts/mainContext'
 import { createTravelPlanning } from '../services/travelPlanningService'
 import { Container } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { customTheme } from '../themes/custom'
+import { useTheme } from '@emotion/react'
 
 export default function PlanningPage() {
     const { mainData } = useContext(mainContext)
     const navigate = useNavigate()
+    const theme = useTheme(customTheme)
 
     useEffect(() => {
         console.log(mainData)
@@ -74,19 +77,19 @@ export default function PlanningPage() {
             <Box sx={{ display: 'flex', justifyContent: 'space-around', my: "40px"}}>
                 {stepperStatus === 0 && <>
                     <Box sx={{padding: '15px', width: '100px'}}></Box>
-                    <ButtonNavigation handleNavigation={handleNavigation} text={'Next'} />
+                    <ButtonNavigation handleNavigation={handleNavigation} text={'Next'} bgColor={theme.palette.secondary.fixedDim} textColor={theme.palette.secondary.fixedVariant} hover={theme.palette.secondary.fixedDim}/>
                     </>}
                 {stepperStatus > 0 && stepperStatus < 3 && <>
-                    <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} />
-                    <ButtonNavigation handleNavigation={handleNavigation} text={'Next'} />
+                    <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} bgColor={theme.palette.terciary.main} textColor={theme.palette.terciary.onContainer} hover={theme.palette.terciary.main}/>
+                    <ButtonNavigation handleNavigation={handleNavigation} text={'Next'} bgColor={theme.palette.secondary.fixedDim} textColor={theme.palette.secondary.fixedVariant} hover={theme.palette.secondary.fixedDim}/>
                 </>}
                 {stepperStatus === 3 && <>
-                    <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} />
-                    <ButtonNavigation handleNavigation={handleNavigation} text={'Go to Summary'} bgColor={"#4BB449"} />
+                    <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} bgColor={theme.palette.terciary.main} textColor={theme.palette.terciary.onContainer} hover={theme.palette.terciary.main} />
+                    <ButtonNavigation handleNavigation={handleNavigation} text={'Go to Summary'} bgColor={theme.palette.primary.main} hover={theme.palette.primary.main}/>
                 </>}
                 {stepperStatus === 4 && <>
-                    <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} />
-                    <ButtonNavigation handleNavigation={handleTravelPlanningCreation} text={'Save Changes'} bgColor={"#4BB449"} />
+                    <ButtonNavigation handleNavigation={handleNavigation} text={'Back'} bgColor={theme.palette.terciary.main} textColor={theme.palette.terciary.onContainer} hover={theme.palette.terciary.main} />
+                    <ButtonNavigation handleNavigation={handleTravelPlanningCreation} text={'Save Changes'} bgColor={theme.palette.primary.main} hover={theme.palette.primary.main}/>
                 </>}
             </Box>
         )

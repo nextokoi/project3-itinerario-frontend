@@ -13,6 +13,10 @@ export const customTheme = createTheme({
             fixedDim: '#FABD00',
             fixedVariant: '#5B4300'
         },
+        terciary: {
+            main: '#CCE5FF',
+            onContainer: '#001E31'
+        },
         background: {
             default: '#DAE5E1'
         },

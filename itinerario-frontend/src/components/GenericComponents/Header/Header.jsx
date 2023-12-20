@@ -15,6 +15,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import bagIcon from '../../../assets/photos/bag.svg'
+import { useTheme } from '@emotion/react';
+import { customTheme } from '../../../themes/custom';
 
 /* const pages = ['Products', 'Pricing', 'Blog']; */
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -25,6 +28,7 @@ function Header() {
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const theme = useTheme(customTheme)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -49,7 +53,9 @@ function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+            <Box component='img' src={bagIcon} sx={{width: '35px'}}></Box>
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -121,7 +127,7 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Itinero
           </Typography>
 {/*           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -141,7 +147,7 @@ function Header() {
           {localStorage.getItem("token") && (<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{backgroundColor: '#858585'}} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -164,8 +170,8 @@ function Header() {
               {settings.map((setting) => {
                  return ( 
                  <Link to={setting.path} style={{ textDecoration: 'none' }} key={setting.name} >
-                    <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting.name}</Typography>
+                    <MenuItem onClick={handleCloseUserMenu} sx={{ width: '130px', display: 'flex', justifyContent: 'center' }}>
+                        <Typography textAlign="center" sx={{ color: "#191C1B" }}>{setting.name}</Typography>
                     </MenuItem>
                   </Link>
                 )

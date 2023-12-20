@@ -34,7 +34,7 @@ export default function ResponsiveDatePickers({ labelText, changeFunction }) {
             >
 
                 <DemoItem label={labelText}>
-                    <DesktopDatePicker defaultValue={dayjs('2023-12-16')} onChange={handleOnChange} />
+                    <DesktopDatePicker defaultValue={dayjs()} onChange={handleOnChange} />
                 </DemoItem>
 
                 {/* <DemoItem label="Mobile variant">
