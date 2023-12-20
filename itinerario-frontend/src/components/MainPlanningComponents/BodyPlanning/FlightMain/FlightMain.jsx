@@ -109,10 +109,12 @@ function FlightMain() {
 
     return (
         <Box sx={{ px: 10 }}>
-            <Box sx={{ mb: 5 }}>
-                <Typography variant='h3'>Fly to your destination</Typography>
+            <Box sx={{display: 'flex', flexDirection: 'column', gap: 5, mb: 5}}>
+                <Box>
+                    <Typography variant='h3'>Fly to your destination</Typography>
+                </Box>
+                <InfoMessage />
             </Box>
-            <InfoMessage />
             <Box sx={{ mb: 10 }}>
 
                 <Box sx={{ mb: 10 }}>

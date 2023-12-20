@@ -61,6 +61,11 @@ export default function Profile() {
     }, [travelPlaningData])
 
     const renderTravelPlanningList = () => {
+        if (travelPlaningData.length === 0){
+            return (
+                <Typography variant='body1'>You don&apos;t have itineraries yet</Typography>
+            )
+        }
         return travelPlaningData.map((plan) => {
             return (
                 <ProfileCard
@@ -80,13 +85,15 @@ export default function Profile() {
                 <Typography variant='h5'>Welcome back, {profileData.username}!</Typography>
                 <Box component="img" src={imageProfile} sx={{height: '300px'}}/>
             </Box >
-            <Box sx={{ mt: 5}}>
-                <Typography variant='h5' sx={{ mt: 5 }}>Here you can view your saved itineraries</Typography>
-                <Box sx={{display: 'flex', justifyContent: 'center', my: 5 }}>
-                    <Box sx={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+            <Box sx={{ my: 10}}>
+                <Container>
+                    <Typography variant='h5' sx={{ mt: 5 }}>Here you can view your saved itineraries</Typography>
+                </Container>
+                <Container sx={{ display: 'flex', my: 5 }}>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                         {renderTravelPlanningList()}
                     </Box>
-                </Box>
+                </Container>
             </Box>
         </Container>
     )

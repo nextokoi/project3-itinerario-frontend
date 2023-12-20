@@ -19,7 +19,7 @@ function ProfileCard({ data }) {
   const endingDate = formatDate(data.ending_date)
 
   return (
-    <Card sx={{ width: 550, p: 1, border: '1px solid #ccc', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <Card sx={{ width: 500, p: 1, border: '1px solid #ccc', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <CardMedia sx={{ height: 300 ,width: 300, borderRadius: 1 }} image={data.travelLocation.imageURL} title="hola"/>
       <CardContent sx={{ height: '300px', display: 'flex', alignItems: 'center' }}>
           <Box sx={{display: 'flex', flexDirection: 'column', gap: '20px'}}>

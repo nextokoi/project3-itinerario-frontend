@@ -1,7 +1,7 @@
 import FlightCardSummary from '../../../GenericComponents/FlightCardSummary/FlightCardSummary'
 import ActivityCardSummary from '../../../GenericComponents/ActivityCardSummary/ActivityCardSummary'
 import './SummaryMain.css'
-import { Box, Divider, Typography } from '@mui/material'
+import { Box, Container, Divider, Typography } from '@mui/material'
 import { useContext } from 'react'
 import { mainContext } from '../../../../contexts/mainContext'
 
@@ -50,7 +50,7 @@ function SummaryMain() {
         return mainData.activities.map((activity, index) => {
             return (
                 <Box key={index}>
-                    <Typography>{`Day ${index + 1}`}</Typography>
+                    <Typography variant='h6' sx={{mb: 2}}>{`Day ${index + 1}`}</Typography>
                     <ActivityCardSummary
                         activityImg={activity.imageURL}
                         activityTitle={activity.name}
@@ -65,7 +65,7 @@ function SummaryMain() {
         return mainData.lodging.map((activity, index) => {
             return (
                 <Box key={index}>
-                    <Typography>{`Day ${index + 1}`}</Typography>
+                    <Typography variant='h6' sx={{mb: 2}}>{`Day ${index + 1}`}</Typography>
                     <ActivityCardSummary
                         activityImg={activity.imageURL}
                         activityTitle={activity.name}
@@ -84,18 +84,20 @@ function SummaryMain() {
     // }
 
     return (
-        <Box sx={{ px: 10 }}>
-            <Box sx={{ mb: 5 }}>
-                <Box sx={{ mb: 3 }}>
-                    <Typography variant='h4' >Name</Typography>
-                    <Typography sx={{my:2}} variant='h5'>{travelPlanningName}</Typography>
-                </Box>
-                <Box sx={{ mb: 3 }}>
-                    <Typography variant='h4' >Date</Typography>
-                    <Typography variant='overline'>{mainData.dateGoing} <strong>To</strong>  {mainData.dateBack}</Typography>
+        <Container sx={{my: 5}}>
+            <Container sx={{display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
+                <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                    <Box sx={{ mb: 3 }}>
+                        <Typography variant='h4' sx={{mb: 2}} >Travel Planning Name</Typography>
+                        <Typography variant='h6'>{travelPlanningName}</Typography>
+                    </Box>
+                    <Box sx={{ mb: 3 }}>
+                        <Typography variant='h4' sx={{mb: 2}} >Date</Typography>
+                        <Typography variant='h6'>{mainData.dateGoing} <strong>to</strong>  {mainData.dateBack}</Typography>
+                    </Box>
                 </Box>
                 <Box>
-                    <Typography variant='h4' sx={{ mb: 2 }}>Flights</Typography>
+                    <Typography variant='h4' sx={{ mb: 3 }}>Flights</Typography>
                     <Box sx={{ display: 'flex', gap: '10px' }}>
 
                         <FlightCardSummary
@@ -118,8 +120,7 @@ function SummaryMain() {
                             price={priceGoing}
                             duration={durationGoing}
 
-                        >
-                        </FlightCardSummary>
+                        />
                         <FlightCardSummary
 
                             origin={destination}
@@ -139,40 +140,36 @@ function SummaryMain() {
                             price={priceBack}
                             duration={durationBack}
 
-                        >
-                        </FlightCardSummary>
+                        />
 
                     </Box>
                 </Box>
-            </Box>
+            </Container>
 
-            <Divider />
+            <Divider sx={{my: 8}} />
 
-            <Box sx={{ my: 5 }}>
-                <Typography variant='h4' sx={{ my: 5 }}>Activities</Typography>
-                <Box sx={{ mb: 5 }}>
-
-                    {renderActivityCards()}
-
+            <Container sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <Box>
+                    <Typography variant='h4' sx={{ mb: 5 }}>Activities</Typography>
+                    <Box>
+                        {renderActivityCards()}
+                    </Box>
                 </Box>
-
-            </Box>
-            <Divider />
-            <Box sx={{ my: 5 }}>
-                <Typography variant='h4' sx={{ my: 5 }}>Lodging</Typography>
-                <Box sx={{ mb: 5 }}>
-
-                    {renderLodgingCards()}
-
+                <Box>
+                    <Typography variant='h4' sx={{ mb: 5 }}>Lodging</Typography>
+                    <Box>
+                        {renderLodgingCards()}
+                    </Box>
                 </Box>
+            </Container>
 
-            </Box>
-            <Divider />
-            <Box sx={{ my: 5, display: 'flex', gap: '30px', justifyContent: 'end' }}>
+            <Divider sx={{my: 5}}/>
+            
+            <Box sx={{ mb: 10, display: 'flex', gap: '30px', justifyContent: 'end' }}>
                 <Typography variant='h5'>TOTAL</Typography>
                 <Typography variant='h3'>{priceGoing + priceBack} € </Typography>
             </Box>
-        </Box>
+        </Container>
 
     )
 }

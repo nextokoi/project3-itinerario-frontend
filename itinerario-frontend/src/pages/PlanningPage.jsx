@@ -10,9 +10,11 @@ import { useState, useEffect, useContext } from 'react'
 import { mainContext } from '../contexts/mainContext'
 import { createTravelPlanning } from '../services/travelPlanningService'
 import { Container } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 export default function PlanningPage() {
     const { mainData } = useContext(mainContext)
+    const navigate = useNavigate()
 
     useEffect(() => {
         console.log(mainData)
@@ -45,10 +47,9 @@ export default function PlanningPage() {
         }
         console.log(travelPlanningData)
 
-
-
         createTravelPlanning(travelPlanningData)
-
+        
+        navigate('/profile')
     }
 
     const componentSwitcher = (stepNum) => {

@@ -3,10 +3,12 @@ import ResponsiveDatePickers from '../../../GenericComponents/CalendarPlanning/C
 import { useContext, useState, useEffect } from 'react'
 import { mainContext } from '../../../../contexts/mainContext.js'
 import SaveIcon from '@mui/icons-material/Save';
+import DescriptionAlert from '../../../GenericComponents/Alert/Alert.jsx';
 
 export default function CalendarComponent() {
     const { mainData, setMainData } = useContext(mainContext)
     const [numberOfDays, setNumberOfDays] = useState()
+    const [showAlert, setShowAlert] = useState(false)
 
     const [travelPlanningName, setTravelPlanningName] = useState('');
 
@@ -60,13 +62,15 @@ export default function CalendarComponent() {
             ...prev,
             travelPlanningName
         }))
+
+        setShowAlert(true)
     }
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
             <Typography variant='h6'>Give a name and select the start and end date of your trip</Typography>
             <Box>
-                <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+                <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', my: 5 }}>
                     <Box sx={{display: 'flex', alignItems: 'center', gap:'30px'}}>
                         <TextField 
                             label="Travel Planning name" 
@@ -76,9 +80,9 @@ export default function CalendarComponent() {
                             autoComplete='off'
                         />
                         <Button variant='contained' sx={{height: '50px'}} onClick={handleSaveButtonClick}><SaveIcon /></Button>
-                    </Box>
-                    <Box sx={{height: '50px'}}>
-                        <Typography variant='subtitle1'>{travelPlanningName}</Typography>
+                        <Box sx={{width: '255px', height: '80px'}}>
+                            {showAlert && <DescriptionAlert />}
+                        </Box>
                     </Box>
                 </Box>
                 <Box sx={{
