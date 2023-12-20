@@ -20,48 +20,25 @@ function HeaderPlanning({ stepperStatus }) {
       <Box>
         <CustomizedSteppers stepperStatus={stepperStatus} />
       </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'center', my: 10 }}>
-        <Box
-          sx={{
-            position: 'relative',
-            width: '50%',
-            height: '50%',
-          }}
-        >
-          <Box
-            component="img"
-            alt="Descripción de la imagen"
-            src={destinationImg}
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block'
-            }}
-          />
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              display: 'flex',
-              flexDirection: "column",
-              justifyContent: 'end',
-              gap: '10px',
-              pb: 15,
-              pl: 5,
-              color: '#fff',
-            }}
-          >
-            <Typography variant="h4">{mainData.destination.name}</Typography>
-            <Typography variant="h5">{mainData.destination.country}</Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'end', my: 10, backgroundImage: `url(${destinationImg})`, height: '400px', width: '60%', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: 2, }}>
+            <Box
+              sx={{
+                backgroundColor: 'rgba(95, 95, 95, 0.7)',
+                color: '#fff',
+                width: 'fit-content',
+                height: 'fit-content',
+                padding: 2,
+                borderRadius: 2,
+                mb: 6,
+                ml: 3
+              }}
+            >
+              <Typography variant="h4">{mainData.destination.name}</Typography>
+              <Typography variant="h5">{mainData.destination.country}</Typography>
+            </Box>
           </Box>
         </Box>
-      </Box>
-
     </div>
   )
 }

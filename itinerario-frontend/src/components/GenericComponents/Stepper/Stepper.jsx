@@ -1,4 +1,3 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -6,16 +5,12 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Check from '@mui/icons-material/Check';
-import SettingsIcon from '@mui/icons-material/Settings';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import HotelIcon from '@mui/icons-material/Hotel';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-import { useEffect } from 'react';
 
 
 const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
@@ -73,27 +68,27 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     },
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
-            backgroundImage:
-                'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+            backgroundColor:
+                theme.palette.primary.main,
         },
     },
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
-            backgroundImage:
-                'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+            backgroundColor:
+            theme.palette.primary.main,
         },
     },
     [`& .${stepConnectorClasses.line}`]: {
         height: 3,
         border: 0,
         backgroundColor:
-            theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+            theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#b5c4c0',
         borderRadius: 1,
     },
 }));
 
 const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : theme.palette.primary.main,
     zIndex: 1,
     color: '#fff',
     width: 50,
@@ -103,13 +98,14 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
     justifyContent: 'center',
     alignItems: 'center',
     ...(ownerState.active && {
-        backgroundImage:
-            'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+        backgroundColor:
+            theme.palette.primary.fixed,
+        color: theme.palette.primary.main,
         boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
     }),
     ...(ownerState.completed && {
-        backgroundImage:
-            'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+        backgroundColor:
+            theme.palette.primary.main,
     }),
 }));
 
@@ -152,8 +148,6 @@ ColorlibStepIcon.propTypes = {
 const steps = ['Trip Date', 'Flight Booking', 'Activities','Lodging','Summary'];
 
 export default function CustomizedSteppers({stepperStatus}) {
-
-
     return (
         <Stack sx={{ width: '100%' }} spacing={4}>
             <Stepper alternativeLabel activeStep={stepperStatus} connector={<ColorlibConnector />}>
@@ -165,4 +159,8 @@ export default function CustomizedSteppers({stepperStatus}) {
             </Stepper>
         </Stack>
     );
+}
+
+CustomizedSteppers.propTypes = {
+    stepperStatus : PropTypes.number
 }

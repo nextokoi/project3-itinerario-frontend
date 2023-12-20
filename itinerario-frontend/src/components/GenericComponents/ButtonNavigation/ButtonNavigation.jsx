@@ -9,7 +9,7 @@ function ButtonNavigation({ text, bgColor, textColor, handleNavigation }) {
 
 
   return (
-    <Button variant='contained' onClick={handleClick} sx={{backgroundColor: `${bgColor}`, color: `${textColor}`, padding: '15px', width: '100px'}}>
+    <Button variant='contained' onClick={handleClick} sx={{backgroundColor: `${bgColor}`, color: `${textColor}`, padding: 3, width: '180px'}}>
         {text}
     </Button>
   )

@@ -1,8 +1,7 @@
-import { Box, Divider, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import ActivityCard from '../../../GenericComponents/ActivityCard/ActivityCard'
 import './LodgingMain.css'
 import ActivitySelectedCard from '../../../GenericComponents/ActivitySelectedCard/ActivitySelectedCard'
-import ButtonNavigation from './../../../GenericComponents/ButtonNavigation/ButtonNavigation'
 import InfoMessage from '../../../GenericComponents/InfoMessage/InfoMessage'
 import { getAllActivities } from '../../../../services/activitiesService'
 import { useEffect, useState, useContext } from 'react'
@@ -79,20 +78,22 @@ function LodgingMain() {
     }
 
     return (
-        <Box sx={{ px: 10, my: 5 }}>
-            <Typography variant="h3" sx={{ mb: 5 }}>Choose Lodging</Typography>
-            <InfoMessage />
-            <Typography variant='body1' sx={{ mb: 2 }}>We recommend these lodgings for your trip</Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: 5 }}>
+        <Box sx={{ my: 5, display: 'flex', flexDirection: 'column' }}>
+            <Container sx={{mb: 7, display: 'flex', flexDirection: 'column', gap: 7}}>
+                <Typography variant="h3">Keep moving</Typography>
+                <InfoMessage />
+                <Typography variant='body1'>We recommend these experiences for your trip</Typography>
+            </Container>
+            <Container sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: 5 }}>
 
                 {renderLodgings()}
 
-            </Box>
-            <Box sx={{ mb: 5 }}>
+            </Container>
+            <Container sx={{ my: 3 }}>
 
                 {renderSelectedLodgings()}
 
-            </Box>
+            </Container>
         </Box>
     )
 }

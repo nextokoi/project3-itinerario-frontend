@@ -31,6 +31,13 @@ function LandingPage() {
     }))
   }
 
+  const handleClickToTop = () => {
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth',
+    });
+  };
+
   return (
 
     <Box>
@@ -60,13 +67,13 @@ function LandingPage() {
             <FactCheckIcon /> <Typography>Save a summary of your itinerary with all your chosen activities to your profile for easy access and sharing</Typography>
           </Box>
         </Box>
-        <Box sx={{ backgroundImage: `url(${imageHero})`, height: '767px', width: '80%', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <Box sx={{ backgroundImage: `url(${imageHero})`, height: '767px', width: '80%', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: 5 }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%', justifyContent: 'space-around', paddingLeft: '20px' }}>
             <Box width={300}>
               <Typography variant="h6">What will be your next destination?</Typography>
               <Typography variant="h4">The world is full of mysteries</Typography>
             </Box>
-            <Button variant="contained" sx={{ padding: '20px', backgroundColor: theme.palette.primary.fixed, color: theme.palette.primary.fixedVariant, "&:hover": { backgroundColor: theme.palette.primary.fixed } }}>Start your journey</Button>
+            <Button variant="contained" sx={{ padding: '20px', backgroundColor: theme.palette.primary.fixed, color: theme.palette.primary.fixedVariant, "&:hover": { backgroundColor: theme.palette.primary.fixed } }} onClick={handleClickToTop}>Start your journey</Button>
           </Box>
         </Box>
       </Box>

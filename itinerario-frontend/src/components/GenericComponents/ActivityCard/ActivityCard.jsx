@@ -15,8 +15,8 @@ export default function ActivityCard({ activityData, clickHandle }) {
   }
 
   return (
-    <Card sx={{ width: 500, cursor: 'pointer' }} onClick={handleClick}>
-      <CardContent sx={{ height: '300px', backgroundImage: `url(${activityData.imageURL})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <Card sx={{ width: 350, cursor: 'pointer' }} onClick={handleClick}>
+      <CardContent sx={{ height: '250px', backgroundImage: `url(${activityData.imageURL})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <CardActions sx={{ height: '100%', width: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <Typography variant="h5" sx={{ mb: 3, p: 2, color: '#fff', backgroundColor: '#3a393986', borderRadius: 2 }}>{activityData.name}</Typography>
         </CardActions>

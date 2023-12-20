@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import ActivityCard from '../../../GenericComponents/ActivityCard/ActivityCard'
 import './ActivityMain.css'
 import ActivitySelectedCard from '../../../GenericComponents/ActivitySelectedCard/ActivitySelectedCard'
@@ -46,9 +46,8 @@ function ActivityMain() {
     }
 
     const renderActivities = () => {
-        return activities.filter((activity) => activity.isActivity === true).
-
-            map((activity, index) => {
+        return activities.filter((activity) => activity.isActivity === true)
+            .map((activity, index) => {
                 return (
                     <ActivityCard key={index}
                         activityData={activity}
@@ -63,7 +62,7 @@ function ActivityMain() {
             return selectedActivities.map((activity, index) => {
                 return (
                     <Box key={index}>
-                        <Typography variant="h6">{`Day ${index + 1}`}</Typography>
+                        <Typography variant="h6" sx={{mb: 2}}>{`Day ${index + 1}`}</Typography>
                         <ActivitySelectedCard
                             activityImg={activity.imageURL}
                             activityData={activity}
@@ -78,20 +77,22 @@ function ActivityMain() {
     }
 
     return (
-        <Box sx={{ px: 10, my: 5 }}>
-            <Typography variant="h3" sx={{ mb: 5 }}>Keep moving</Typography>
-            <InfoMessage />
-            <Typography variant='body1' sx={{ mb: 2 }}>We recommend these experiences for your trip</Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: 5 }}>
+        <Box sx={{ my: 5, display: 'flex', flexDirection: 'column' }}>
+            <Container sx={{mb: 7, display: 'flex', flexDirection: 'column', gap: 7}}>
+                <Typography variant="h3">Keep moving</Typography>
+                <InfoMessage />
+                <Typography variant='body1'>We recommend these experiences for your trip</Typography>
+            </Container>
+            <Container sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', mb: 5 }}>
 
                 {renderActivities()}
 
-            </Box>
-            <Box sx={{ mb: 5 }}>
+            </Container>
+            <Container sx={{ my: 3 }}>
 
                 {renderSelectedActivities()}
 
-            </Box>
+            </Container>
         </Box>
     )
 }
