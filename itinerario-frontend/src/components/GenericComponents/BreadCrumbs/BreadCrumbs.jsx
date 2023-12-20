@@ -1,6 +1,7 @@
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import LinkTo from '@mui/material/Link';
+import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
 function handleClick(event) {
@@ -15,22 +16,22 @@ export default function BasicBreadcrumbs() {
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
-          Home
-        </Link>
+        <LinkTo underline="hover" color="inherit" href="/">
+          <Link to={"/"}>Home</Link>
+        </LinkTo>
         {pathnames.map((name, index) => {
-        const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
-        const isLast = index === pathnames.length - 1;
-        return isLast ? (
-          <Typography color="text.primary" key={name}>
-            {name[0].toUpperCase() + name.substring(1)}
-          </Typography>
-        ) : (
-          <Link underline="hover" color="inherit" href={routeTo} key={name}>
-            {name}
-          </Link>
-        );
-      })}
+          const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
+          const isLast = index === pathnames.length - 1;
+          return isLast ? (
+            <Typography color="text.primary" key={name}>
+              {name[0].toUpperCase() + name.substring(1)}
+            </Typography>
+          ) : (
+            <LinkTo underline="hover" color="inherit" href={routeTo} key={name}>
+              {name}
+            </LinkTo>
+          );
+        })}
       </Breadcrumbs>
     </div>
   );
