@@ -6,53 +6,31 @@ import imageProfile from '../assets/photos/profile.svg'
 import BasicBreadcrumbs from '../components/GenericComponents/BreadCrumbs/BreadCrumbs'
 import { getOwnTravelPlannings } from '../services/travelPlanningService'
 import ProfileCard from '../components/GenericComponents/ProfileCard/ProfileCard'
+import CircularIndeterminate from '../components/GenericComponents/CircularIndeterminate/CircularIndeterminate'
 
 export default function Profile() {
     const [profileData, setProfileData] = useState({})
     const [travelPlaningData, setTravelPlaningData] = useState([])
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-            try {
-                const data = await getOwnProfile()
-                console.log(data)
-                setProfileData(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        fetchData()
-
-    }, [])
-
-    // nos traemos la información del usuario
-    // y nos traemos la informacion de los travel plannings del usuario
-
+    const [loading, setLoading] = useState(true)
     
     useEffect(() => {
 
-        const fetchData = async () => {
+        const fetchDataAndTravelPlanning = async () => {
             try {
                 const data = await getOwnProfile()
                 console.log(data)
                 setProfileData(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        const fetchTravelPlanningData = async () => {
-            try {
+
                 const dataTP = await getOwnTravelPlannings()
                 setTravelPlaningData(dataTP)
             } catch (error) {
                 console.log(error)
+            } finally {
+                setLoading(false)
             }
-
         }
-        fetchData()
-        fetchTravelPlanningData()
+        
+        fetchDataAndTravelPlanning()
 
     }, [])
 
@@ -61,11 +39,14 @@ export default function Profile() {
     }, [travelPlaningData])
 
     const renderTravelPlanningList = () => {
-        if (travelPlaningData.length === 0){
-            return (
-                <Typography variant='body1'>You don&apos;t have itineraries yet</Typography>
-            )
+        if(loading){
+            return <CircularIndeterminate />
         }
+
+        if (travelPlaningData.length === 0){
+            return <Typography variant='body1'>You don&apos;t have itineraries yet</Typography>  
+        }
+        
         return travelPlaningData.map((plan) => {
             return (
                 <ProfileCard
