@@ -98,7 +98,7 @@ export default function PlanningPage() {
 
     return (
 
-        <Container>
+        <Container sx={{ py: 14}}>
 
             <HeaderPlanning stepperStatus={stepperStatus} />
             {componentSwitcher(stepperStatus)}

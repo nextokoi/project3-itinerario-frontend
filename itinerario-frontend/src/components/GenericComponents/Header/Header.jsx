@@ -16,8 +16,20 @@ import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import bagIcon from '../../../assets/photos/bag.svg'
+import itLogo from '../../../assets/photos/itLogo.png'
+import itLogo2 from '../../../assets/photos/ItLogo2.png'
+import itLogo3 from '../../../assets/photos/itLogo3.png'
+import itLogo4 from '../../../assets/photos/itLogo4.png'
+import itLogo5 from '../../../assets/photos/itLogo5.png'
+import avPhoto from '../../../assets/photos/avPhoto.jpg'
 import { useTheme } from '@emotion/react';
 import { customTheme } from '../../../themes/custom';
+import { styled } from '@mui/material/styles';
+
+const SmallAvatar = styled(Avatar)({
+  width: 34,
+  height: 34,
+});
 
 /* const pages = ['Products', 'Pricing', 'Blog']; */
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -42,7 +54,7 @@ function Header() {
   };
 
   const handleCloseUserMenu = (e) => {
-    if(e.target.outerText === 'Logout'){
+    if (e.target.outerText === 'Logout') {
       localStorage.removeItem('token')
       navigate('/')
     }
@@ -50,65 +62,18 @@ function Header() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-            <Box component='img' src={bagIcon} sx={{width: '35px'}}></Box>
+    <AppBar position="static" sx={{ minHeight: 160 }} >
+      <Container maxWidth="xl" display={"flex"} sx={{ alignContent: "center", alignItems: "center", justifyContent: "center" }}>
+        <Toolbar disableGutters display={"flex"} sx={{ alignContent: "center", alignItems: "center", justifyContent: "center" }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, px: 16, py: 6, alignContent: "center", alignItems: "center", justifyContent: "center" }}>
+            <Box
+              onClick={() => { navigate('/') }}
+              component='img'
+              src={itLogo5} sx={{ width: '215px' }}></Box>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Itinero
-          </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
- {/*            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
+
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -129,26 +94,18 @@ function Header() {
           >
             Itinero
           </Typography>
-{/*           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box> */}
+
           {!localStorage.getItem("token") && (
-            <Button component={Link} to={'/login'} sx={{ color: '#fff', mr: 5}}>Sign in <AccountCircleIcon sx={{ml: 1}}/></Button>
-          )} 
-    
-          {localStorage.getItem("token") && (<Box sx={{ flexGrow: 0 }}>
+            <Button component={Link} to={'/login'} sx={{ color: '#fff', mr: 5 }}>Sign in <AccountCircleIcon sx={{ ml: 1 }} /></Button>
+          )}
+
+          {localStorage.getItem("token") && (<Box sx={{ flexGrow: 0, pr: 17 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{backgroundColor: '#858585'}} />
+              <IconButton size={"small"} onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <SmallAvatar src={avPhoto} sx={{ backgroundColor: '#858585', mr: 1 }} />
+                <MenuIcon fontSize={"medium"} sx={{ color: 'white' }} ></MenuIcon>
               </IconButton>
+
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
@@ -168,10 +125,10 @@ function Header() {
             >
 
               {settings.map((setting) => {
-                 return ( 
-                 <Link to={setting.path} style={{ textDecoration: 'none' }} key={setting.name} >
+                return (
+                  <Link to={setting.path} style={{ textDecoration: 'none' }} key={setting.name} >
                     <MenuItem onClick={handleCloseUserMenu} sx={{ width: '130px', display: 'flex', justifyContent: 'center' }}>
-                        <Typography textAlign="center" sx={{ color: "#191C1B" }}>{setting.name}</Typography>
+                      <Typography textAlign="center" sx={{ color: "#191C1B" }}>{setting.name}</Typography>
                     </MenuItem>
                   </Link>
                 )

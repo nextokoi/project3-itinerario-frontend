@@ -10,19 +10,36 @@ export default function CalendarComponent() {
     const [numberOfDays, setNumberOfDays] = useState()
     const [showAlert, setShowAlert] = useState(false)
 
+    const [dateGoingg, setDateGoingg] = useState("")
+    const [dateBackk, setDateBackk] = useState("")
+
     const [travelPlanningName, setTravelPlanningName] = useState('');
 
+    const formatDate = (date) => {
+        const parts = date.split('-'); // Divide la fecha en partes [YYYY, M, D]
+        const year = parts[0];
+        const month = parts[1].padStart(2, '0'); // Añade un cero si es necesario
+        const day = parts[2].padStart(2, '0'); // Añade un cero si es necesario
+        return `${year}-${month}-${day}`; // Reensambla la fecha en el formato deseado
+    }
+
     const handleOnChangeGoing = (date) => {
+
+        const formattedDate = formatDate(date)
         setMainData(prev => ({
             ...prev,
-            dateGoing: date
+            dateGoing: formattedDate
         }))
     }
-    
+
+
+
     const handleOnChangeBack = (date) => {
+
+        const formattedDate = formatDate(date)
         setMainData(prev => ({
             ...prev,
-            dateBack: date
+            dateBack: formattedDate
         }))
     }
 
@@ -56,7 +73,7 @@ export default function CalendarComponent() {
     const handleTextFieldChange = (e) => {
         setTravelPlanningName(e.target.value)
     }
-    
+
     const handleSaveButtonClick = () => {
         setMainData(prev => ({
             ...prev,
@@ -70,17 +87,17 @@ export default function CalendarComponent() {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
             <Typography variant='h6'>Give a name and select the start and end date of your trip</Typography>
             <Box>
-                <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', my: 5 }}>
-                    <Box sx={{display: 'flex', alignItems: 'center', gap:'30px'}}>
-                        <TextField 
-                            label="Travel Planning name" 
-                            sx={{width: '300px'}}
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', my: 5 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
+                        <TextField
+                            label="Travel Planning name"
+                            sx={{ width: '300px' }}
                             value={travelPlanningName}
                             onChange={handleTextFieldChange}
                             autoComplete='off'
                         />
-                        <Button variant='contained' sx={{height: '50px'}} onClick={handleSaveButtonClick}><SaveIcon /></Button>
-                        <Box sx={{width: '255px', height: '80px'}}>
+                        <Button variant='contained' sx={{ height: '50px' }} onClick={handleSaveButtonClick}><SaveIcon /></Button>
+                        <Box sx={{ width: '255px', height: '80px' }}>
                             {showAlert && <DescriptionAlert />}
                         </Box>
                     </Box>

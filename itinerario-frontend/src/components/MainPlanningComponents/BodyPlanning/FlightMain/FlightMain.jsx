@@ -46,7 +46,6 @@ function FlightMain() {
         }
     ]
 
-
     //Select and unselect flight cards
 
     const handleFlightSelectGoing = (flight) => {
@@ -65,9 +64,11 @@ function FlightMain() {
         }))
     }
 
-
-
     // filtering and mapping the list of flights cards
+
+    console.log("fligthBACK", flightListBack)
+    console.log("fligthGOING", flightListGoing)
+    console.log(mainData)
 
     const renderFlightListGoing = (flightList) => {
         return flightList.filter((flight) => flight.depart_date === mainData.dateGoing)
@@ -86,6 +87,7 @@ function FlightMain() {
                 )
             })
     }
+
 
     const renderFlightListBack = (flightList) => {
         return flightList.filter((flight) => flight.depart_date === mainData.dateBack)
@@ -109,7 +111,7 @@ function FlightMain() {
 
     return (
         <Box sx={{ px: 10 }}>
-            <Box sx={{display: 'flex', flexDirection: 'column', gap: 5, mb: 5}}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5, mb: 5 }}>
                 <Box>
                     <Typography variant='h3'>Fly to your destination</Typography>
                 </Box>
@@ -120,17 +122,18 @@ function FlightMain() {
                 <Box sx={{ mb: 10 }}>
                     <Typography variant='h4' sx={{ mb: 2 }}>One-Way</Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                        {renderFlightListGoing(flightListGoing)}
+                        {flightListGoing && renderFlightListGoing(flightListGoing)}
                     </Box>
                 </Box>
 
                 <Box>
                     <Typography variant='h4' sx={{ mb: 2 }}>Return</Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                        {renderFlightListBack(flightListBack)}
+                        {flightListBack && renderFlightListBack(flightListBack)}
                     </Box>
                 </Box>
             </Box>
+
         </Box>
     )
 

@@ -5,10 +5,10 @@ import { Box } from "@mui/material"
 
 export default function Root() {
   return (
-    <Box sx={{display: 'grid', height: '100%', minHeight: '100vh', gridTemplateRows: '60px 1fr 120px'}}>
-        <Header/>
-        <Outlet />
-        <Footer/>
+    <Box sx={{ display: 'grid', height: '100%', minHeight: '100vh', gridTemplateRows: '60px 1fr 120px' }}>
+      <Header />
+      <Outlet />
+      <Footer />
     </Box>
   )
 }
